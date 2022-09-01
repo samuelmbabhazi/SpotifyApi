@@ -7,10 +7,12 @@ import {
   MdSettings,
 } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
-function Sidebar({ genres }) {
-  let id = genres.listOfId;
-  console.log(id);
 
+function Sidebar({ genres, setIde,ide ,onclik}) {
+  console.log(genres.listOfGenresFromAPI);
+const click=e=>{
+  onclik(e.target.value)
+}
   return (
     <Container>
       <div className="top_links">
@@ -40,7 +42,7 @@ function Sidebar({ genres }) {
           {genres.listOfIconFromAPi &&
             genres.listOfIconFromAPi.map((icon, i) => {
               return (
-                <li key={i}>
+                <li key={i} value={icon.id} onClick={() => setIde(icon.id)}>
                   <img
                     src={icon.icon[0] && icon.icon[0].url}
                     width={30}
@@ -68,13 +70,11 @@ function Sidebar({ genres }) {
             </div>
           </li>
         </ul>
-       
       </div>
     </Container>
   );
 }
 const Container = styled.div`
-  
   background: linear-gradient(
     135deg,
     rgb(255, 255, 255, 0.1),
@@ -87,16 +87,16 @@ const Container = styled.div`
   flex-direction: column;
   width: 20vw;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  overflow:hidden;
-  .card{
-    margin-top:18%;
-    border-radius:5px;
-      height:150px;
-      width:90%;
-margin-left:auto;
-margin-right:auto;
-      background-color:blue;
-     }
+  overflow: hidden;
+  .card {
+    margin-top: 18%;
+    border-radius: 5px;
+    height: 150px;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: blue;
+  }
   .top_links {
     display: flex;
     flex-direction: column;
@@ -110,7 +110,6 @@ margin-right:auto;
     }
   }
   .end {
-    
   }
   ul {
     list-style-type: none;
@@ -118,17 +117,16 @@ margin-right:auto;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-   
+
     li {
       display: flex;
       gap: 1rem;
       cursor: pointer;
-  transition: color .3s ease-in-out; 
+      transition: color 0.3s ease-in-out;
 
-  font-size:15px;
+      font-size: 15px;
       &:hover {
-        
-        border-left:2px solid blue;
+        border-left: 2px solid blue;
         color: blue;
       }
     }
@@ -153,20 +151,17 @@ margin-right:auto;
         }
       }
     }
-  
   }
-  .categorie{
-    height:55vh;
-    max-height:100%;
-    overflow:auto;
-    &::-webkit-scrollbar{
-      width:0.2rem;
-      &-thumb{
-        background-color:blue;
+  .categorie {
+    height: 55vh;
+    max-height: 100%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0.2rem;
+      &-thumb {
+        background-color: blue;
       }
     }
-   
-   }
-  
+  }
 `;
-export default Sidebar;
+export default React.memo (Sidebar);

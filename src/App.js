@@ -10,6 +10,8 @@ import Sidebar from "./Sidebar";
 import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
+  const [ide, setIde] = useState("toplists");
+
   const spotify = Identifiants();
 
   console.log("RENDERING APP.JS");
@@ -50,39 +52,49 @@ const App = () => {
           },
         }
       ).then((genreResponse) => {
-       
         setGenres({
           listOfGenresFromAPI: genreResponse.data.categories.items,
-          listOfId: genreResponse.data.categories.items.map((iden) =>  iden.id),
-            
-          
+
           listOfIconFromAPi: genreResponse.data.categories.items.map(
-            (genre) => ({ icon: genre.icons, name: genre.name })
+            (genre) => ({ icon: genre.icons, id: genre.id, name: genre.name })
           ),
         });
-      
+        console.log("nouve:", genres.listOfGenresFromAPI);
       });
-      
     });
-
     axios(
-      `https://api.spotify.com/v1/browse/categories/pop/playlists?limit=15`,
+    `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=15`,
+    {
+      method: "GET",
+      headers: { Authorization: "Bearer " + token },
+    }
+  ).then((playlistResponse) => {
+    setPlaylist({
+      selectedPlaylist: playlist.selectedPlaylist,
+      listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
+    });
+    console.log("playlist", playlist.listOfPlaylistFromAPI);
+  });
+  axios(
+      `https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks`,
       {
         method: "GET",
-        headers: { Authorization: "Bearer " + token },
+        headers: {
+          Authorization: "Bearer " + token,
+        },
       }
-    ).then((playlistResponse) => {
-      setPlaylist({
-        selectedPlaylist: playlist.selectedPlaylist,
-        listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
+    ).then((tracksResponse) => {
+      setTracks({
+        selectedTrack: tracks.selectedTrack,
+        listOfTracksFromAPI: tracksResponse.data.items,
       });
-      console.log("playlist", playlist.listOfPlaylistFromAPI);
+      console.log(tracksResponse);
     });
-  }, [genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
-
+  }, [ide,genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
+ 
   return (
     <Container>
-      <Sidebar genres={genres} />
+      <Sidebar genres={genres} ide={ide} setIde={setIde} />
 
       <Body playlist={playlist} />
 
@@ -93,4 +105,4 @@ const App = () => {
 const Container = styled.div`
   display: flex;
 `;
-export default App;
+export default React.memo(App);

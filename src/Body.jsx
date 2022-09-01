@@ -92,4 +92,4 @@ const Container = styled.div`
     
   }
 `;
-export default Body;
+export default React.memo(Body) ;
