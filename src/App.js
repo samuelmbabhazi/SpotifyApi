@@ -7,7 +7,6 @@ import styled from "styled-components";
 import Body from "./Body";
 
 import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
 import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
@@ -43,7 +42,7 @@ const App = () => {
       setToken(tokenResponse.data.access_token);
 
       axios(
-        "https://api.spotify.com/v1/browse/categories?locale=sv_US&limit=8",
+        "https://api.spotify.com/v1/browse/categories?locale=sv_US&limit=25",
         {
           method: "GET",
           headers: {
@@ -51,18 +50,23 @@ const App = () => {
           },
         }
       ).then((genreResponse) => {
-        console.log(genreResponse);
+       
         setGenres({
           listOfGenresFromAPI: genreResponse.data.categories.items,
-
+          listOfId: genreResponse.data.categories.items.map((iden) =>  iden.id),
+            
+          
           listOfIconFromAPi: genreResponse.data.categories.items.map(
             (genre) => ({ icon: genre.icons, name: genre.name })
           ),
         });
+      
       });
+      
     });
+
     axios(
-      `https://api.spotify.com/v1/browse/categories/toplists/playlists?limit=20`,
+      `https://api.spotify.com/v1/browse/categories/pop/playlists?limit=15`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },

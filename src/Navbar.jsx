@@ -8,11 +8,11 @@ function Navbar() {
       <div className="search_bar">
         <input type="text" placeholder="Artist, song" />
         <div className="search">
-          <FaSearch />
+         <span><FaSearch /></span> 
         </div>
       </div>
       <div className="notification">
-        <MdNotifications />
+      <span><MdNotifications /></span>  
       </div>
     </Container>
   );
@@ -37,7 +37,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    
+    span{
+      color:blue;
+    }
 
     input {
       border: none;
@@ -56,7 +58,10 @@ const Container = styled.div`
     height: 40px;
     border-radius: 50%;
     background-color: white;
-    
+    span{
+      font-size:20px;
+       color:blue;
+    }
   }
 `;
 export default Navbar;

@@ -16,12 +16,16 @@ function Body({ playlist }) {
           playlist.listOfPlaylistFromAPI.map((image, i) => {
             return (
               <li key={i}>
-                <img src={image.images[0] && image.images[0].url} />
+                <img src={image.images[0] && image.images[0].url} alt=""/>
               </li>
             );
           })}
       </ul>
-     
+      <div className="contcard">
+      <div className="card"></div>
+     <div className="card"></div>
+      </div>
+    
     </Container>
   );
 }
@@ -43,18 +47,49 @@ const Container = styled.div`
   .playlist {
     margin: 0 2rem;
     display: flex;
-    flex-wrap: wrap;
+    
     align-items: center;
-
-    gap: 1.2rem;
+    width:54vW;
+    max-height:100%;
+    overflow:auto;
+    &::-webkit-scrollbar{
+      height:0.2rem;
+      &-thumb{
+        background-color:blue;
+      }
+   
+   }
+   gap: 1rem;
     li {
       list-style: none;
       img {
-        height: 10rem;
+        height: 11rem;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       }
     }
   }
-  
+  .contcard{
+    
+    display:flex;
+    justify-content:center;
+    margin-top:10%;
+    gap:2rem
+  }
+  .card{
+    
+    background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255, 0.1),
+    rgb(255, 255, 255, 0)
+  );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid rgb(255, 255, 255, 0.18);
+  border-radius:10px;
+    width:44%;
+    height:400px;
+    
+  }
 `;
 export default Body;

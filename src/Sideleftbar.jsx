@@ -36,7 +36,7 @@ function Sideleftbar({ genres }) {
               genres.listOfIconFromAPi.map((icon, i) => {
                 return (
                   <li key={i}>
-                    <img src={icon.icon[0] && icon.icon[0].url} width={30} />
+                    <img src={icon.icon[0] && icon.icon[0].url}  alt=""/>
                     {icon.name}
                   </li>
                 );
@@ -49,15 +49,15 @@ function Sideleftbar({ genres }) {
 }
 const Container = styled.div`
   margin-top: 5%;
-  
+  overflow:hidden;
   display: flex;
   flex-direction: column;
-  width: 85%;
+  width:20vw;
   
   
   .playing {
     border-radius: 10px;
-    height: 425px;
+    height: 310px;
     background-color: #2d3a5a;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     
@@ -77,17 +77,26 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
+    height:55vh;
+    max-height:100%;
+    overflow:auto;
+    &::-webkit-scrollbar{
+      width:0.2rem;
+      &-thumb{
+        background-color:blue;
+      }
+    }
     li {
       display: flex;
       gap: 1rem;
       cursor: pointer;
       transition: 0.3s ease-in-out;
       &:hover {
-        color: green;
+        color: blue;
       }
       img{
         width:35px;
-        border-radius:5px;
+        border-radius:50%;
       }
     }
   }

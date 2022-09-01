@@ -8,6 +8,9 @@ import {
 } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 function Sidebar({ genres }) {
+  let id = genres.listOfId;
+  console.log(id);
+
   return (
     <Container>
       <div className="top_links">
@@ -32,19 +35,25 @@ function Sidebar({ genres }) {
         </ul>
         <div className="line"></div>
 
-        <ul>
+        <ul className="categorie">
           <span>CATEGORIES</span>
           {genres.listOfIconFromAPi &&
             genres.listOfIconFromAPi.map((icon, i) => {
               return (
                 <li key={i}>
-                  <img src={icon.icon[0] && icon.icon[0].url} width={30} />
+                  <img
+                    src={icon.icon[0] && icon.icon[0].url}
+                    width={30}
+                    alt=""
+                  />
+
                   {icon.name}
                 </li>
               );
             })}
         </ul>
         <div className="line"></div>
+        <div className="card"></div>
         <ul className="end">
           <li>
             <MdSettings />
@@ -59,17 +68,35 @@ function Sidebar({ genres }) {
             </div>
           </li>
         </ul>
+       
       </div>
     </Container>
   );
 }
 const Container = styled.div`
-  background-color: #e8eaee;
+  
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255, 0.1),
+    rgb(255, 255, 255, 0)
+  );
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+
   display: flex;
   flex-direction: column;
-  width: 50%;
+  width: 20vw;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-
+  overflow:hidden;
+  .card{
+    margin-top:18%;
+    border-radius:5px;
+      height:150px;
+      width:90%;
+margin-left:auto;
+margin-right:auto;
+      background-color:blue;
+     }
   .top_links {
     display: flex;
     flex-direction: column;
@@ -83,7 +110,7 @@ const Container = styled.div`
     }
   }
   .end {
-    padding-top: 100%;
+    
   }
   ul {
     list-style-type: none;
@@ -91,21 +118,22 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
+   
     li {
       display: flex;
       gap: 1rem;
       cursor: pointer;
   transition: color .3s ease-in-out; 
-  box-shadow .3s ease-in-out;
+
+  font-size:15px;
       &:hover {
         
-        
-        box-shadow: inset 200px 0 0 0 #2d3a5a;
-        color: white;
+        border-left:2px solid blue;
+        color: blue;
       }
     }
     .avatar {
-      background-color: #2d3a5a;
+      background-color: blue;
       padding: 0.3rem 0.4rem;
       padding-right: 1rem;
       border-radius: 2rem;
@@ -125,6 +153,20 @@ const Container = styled.div`
         }
       }
     }
+  
   }
+  .categorie{
+    height:55vh;
+    max-height:100%;
+    overflow:auto;
+    &::-webkit-scrollbar{
+      width:0.2rem;
+      &-thumb{
+        background-color:blue;
+      }
+    }
+   
+   }
+  
 `;
 export default Sidebar;
