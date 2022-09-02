@@ -62,12 +62,7 @@ const click=e=>{
             <span>Settings</span>
           </li>
           <li>
-            <div className="avatar">
-              <a href="#">
-                <FaUserCircle />
-                <span></span>
-              </a>
-            </div>
+            
           </li>
         </ul>
       </div>
@@ -75,11 +70,7 @@ const click=e=>{
   );
 }
 const Container = styled.div`
-  background: linear-gradient(
-    135deg,
-    rgb(255, 255, 255, 0.1),
-    rgb(255, 255, 255, 0)
-  );
+  background-color:#2D2D2D; 
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(20px);
 
@@ -95,7 +86,7 @@ const Container = styled.div`
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    background-color: blue;
+    background-color: #925FF0;
   }
   .top_links {
     display: flex;
@@ -130,28 +121,9 @@ const Container = styled.div`
         color: blue;
       }
     }
-    .avatar {
-      background-color: blue;
-      padding: 0.3rem 0.4rem;
-      padding-right: 1rem;
-      border-radius: 2rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        text-decoration: none;
-        color: white;
-        font-weight: bold;
-        svg {
-          font-size: 1.3rem;
-        }
-      }
+    
     }
-  }
+  
   .categorie {
     height: 55vh;
     max-height: 100%;

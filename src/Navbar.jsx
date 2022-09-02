@@ -1,19 +1,45 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
-function Navbar() {
+function Navbar({ search, setSearch }) {
+  const Mysearch = (e) => {
+    setSearch(e.target.value);
+  };
+  const changeContent = (event) => {
+    event.preventDefault();
+
+    setSearch(search);
+
+    setSearch("");
+  };
   return (
     <Container>
       <div className="search_bar">
-        <input type="text" placeholder="Artist, song" />
-        <div className="search">
-         <span><FaSearch /></span> 
-        </div>
+        <form action="" onSubmit={changeContent}>
+          <input
+            type="text"
+            placeholder="Artist, song"
+            required
+            value={search}
+            onChange={Mysearch}
+          />
+          <div className="search">
+            <button type="submit">
+              <span>
+                <FaSearch />
+              </span>{" "}
+            </button>
+          </div>
+        </form>
       </div>
+
       <div className="notification">
-      <span><MdNotifications /></span>  
+        <span>
+          <MdNotifications />
+        </span>
       </div>
+    
     </Container>
   );
 }
@@ -25,10 +51,21 @@ const Container = styled.div`
   padding: 2rem;
   height: 15vh;
 
-
   top: 0;
   transition: 0.3s ease-in-out;
   background-color: none;
+  
+  button {
+    border: none;
+    background-color: transparent;
+  }
+  form {
+    display: flex;
+    gap: 25px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+  }
   .search_bar {
     background-color: white;
     width: 30%;
@@ -37,8 +74,8 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    span{
-      color:blue;
+    span {
+      color: blue;
     }
 
     input {
@@ -58,9 +95,9 @@ const Container = styled.div`
     height: 40px;
     border-radius: 50%;
     background-color: white;
-    span{
-      font-size:20px;
-       color:blue;
+    span {
+      font-size: 20px;
+      color: blue;
     }
   }
 `;

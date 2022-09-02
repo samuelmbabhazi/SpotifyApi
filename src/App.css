@@ -9,8 +9,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f5f5f5;
-  color: #4d4e50;
+  background-color: #0B0B0B;
+  color: white;
   font-family: 'ABeeZee', sans-serif;
 }
 .line {

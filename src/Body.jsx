@@ -1,18 +1,23 @@
 import React from "react";
-import { MdQueueMusic, MdSettingsInputHdmi } from "react-icons/md";
+import { FaUserCircle } from "react-icons/fa";
+import { MdQueueMusic } from "react-icons/md";
 import styled from "styled-components";
 import Navbar from "./Navbar";
-function Body({ playlist, items, setIdp }) {
+function Body({ playlist, items, setIdp, search, setSearch }) {
   console.log("items :", items);
   return (
     <Container>
-      <Navbar />
-
+      {/* <div className="avatar">
+        <a href="#">
+          <FaUserCircle/>
+          <span></span>
+        </a>
+      </div> */}
+      <Navbar search={search} setSearch={setSearch} />
       <div className="entete">
         <span>POPULAR PLAYLIST</span>
         <span className="detail">SEE DETAIL</span>
       </div>
-
       <ul className="playlist">
         {playlist.listOfPlaylistFromAPI &&
           playlist.listOfPlaylistFromAPI.map((image, i) => {
@@ -23,12 +28,15 @@ function Body({ playlist, items, setIdp }) {
             );
           })}
       </ul>
+      <div className="tracks">
+      <span className="span">
+        <MdQueueMusic />{" "}
+      </span>{" "}
+      TRACKS
+      </div>
+      
       <div className="contcard">
         <div className="card">
-          <span>
-            <MdQueueMusic />{" "}
-          </span>{" "}
-          TRACKS
           {items.map((item, idx) => (
             <div>
               <li key={idx}>
@@ -80,7 +88,7 @@ const Container = styled.div`
   .contcard {
     display: flex;
     justify-content: center;
-    margin-top: 10%;
+    
     gap: 2rem;
     overflow: hidden;
   }
@@ -115,10 +123,39 @@ const Container = styled.div`
       width: 30px;
       border-radius: 50%;
     }
-    span {
+    
+  }
+  .avatar {
+    background-color: blue;
+    padding: 0.3rem 0.4rem;
+    padding-right: 1rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    margin-left: auto;
+    margin-top: 15px;
+
+    a {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      svg {
+        font-size: 1.3rem;
+      }
+    }
+  }
+  .span {
       font-size: 25px;
       color: blue;
     }
-  }
+    .tracks{
+margin-top:7%;
+margin-left:3%;
+    }
 `;
 export default React.memo(Body);

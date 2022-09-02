@@ -53,11 +53,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 20vw;
+  background-color:#2D2D2D;
 
   .playing {
     border-radius: 10px;
     height: 310px;
-    background-color: #2d3a5a;
+    background-color: #925FF0;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     .play {
@@ -67,7 +68,7 @@ const Container = styled.div`
       gap: 20px;
       margin-top: 92%;
       height: 20%;
-      background-color: #e8eaee;
+      background-color: #0B0B0B;
     }
   }
   ul {
