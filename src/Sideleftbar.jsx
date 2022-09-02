@@ -36,7 +36,7 @@ function Sideleftbar({ genres }) {
               genres.listOfIconFromAPi.map((icon, i) => {
                 return (
                   <li key={i}>
-                    <img src={icon.icon[0] && icon.icon[0].url}  alt=""/>
+                    <img src={icon.icon[0] && icon.icon[0].url} alt="" />
                     {icon.name}
                   </li>
                 );
@@ -49,41 +49,40 @@ function Sideleftbar({ genres }) {
 }
 const Container = styled.div`
   margin-top: 5%;
-  overflow:hidden;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  width:20vw;
-  
-  
+  width: 20vw;
+
   .playing {
     border-radius: 10px;
     height: 310px;
     background-color: #2d3a5a;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    
+
     .play {
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
       margin-top: 92%;
       height: 20%;
-      background-color:#e8eaee  ;
-    
+      background-color: #e8eaee;
     }
-    ul {
+  }
+  ul {
     list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-    height:55vh;
-    max-height:100%;
-    overflow:auto;
-    &::-webkit-scrollbar{
-      width:0.2rem;
-      &-thumb{
-        background-color:blue;
+    height: 55vh;
+    max-height: 100%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      width: 0.2rem;
+      &-thumb {
+        background-color: blue;
       }
     }
     li {
@@ -94,9 +93,9 @@ const Container = styled.div`
       &:hover {
         color: blue;
       }
-      img{
-        width:35px;
-        border-radius:50%;
+      img {
+        width: 35px;
+        border-radius: 50%;
       }
     }
   }

@@ -11,6 +11,7 @@ import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
   const [ide, setIde] = useState("toplists");
+  const [idp, setIdp] = useState("37i9dQZF1DX0XUsuxWHRQd");
 
   const spotify = Identifiants();
 
@@ -63,40 +64,41 @@ const App = () => {
       });
     });
     axios(
-    `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=15`,
-    {
-      method: "GET",
-      headers: { Authorization: "Bearer " + token },
-    }
-  ).then((playlistResponse) => {
-    setPlaylist({
-      selectedPlaylist: playlist.selectedPlaylist,
-      listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
-    });
-    console.log("playlist", playlist.listOfPlaylistFromAPI);
-  });
-  axios(
-      `https://api.spotify.com/v1/playlists/37i9dQZF1DXcBWIGoYBM5M/tracks`,
+      `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=15`,
       {
+        method: "GET",
+        headers: { Authorization: "Bearer " + token },
+      }
+    ).then((playlistResponse) => {
+      setPlaylist({
+        selectedPlaylist: playlist.selectedPlaylist,
+        listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
+      
+      });
+      console.log("playlist", playlist.ListOfidPlaylist);
+      axios(`https://api.spotify.com/v1/playlists/${idp}/tracks?limit=15`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,
         },
-      }
-    ).then((tracksResponse) => {
-      setTracks({
-        selectedTrack: tracks.selectedTrack,
-        listOfTracksFromAPI: tracksResponse.data.items,
+      }).then((tracksResponse) => {
+        setTracks({
+          selectedTrack: tracks.selectedTrack,
+          listOfTracksFromAPI: tracksResponse.data.items,
+        });
       });
-      console.log(tracksResponse);
     });
-  }, [ide,genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
- 
+  }, [ide,idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
+  console.log("track:", tracks.listOfTracksFromAPI);
   return (
     <Container>
       <Sidebar genres={genres} ide={ide} setIde={setIde} />
 
-      <Body playlist={playlist} />
+      <Body
+        playlist={playlist}
+        items={tracks.listOfTracksFromAPI}
+        setIdp={setIdp}
+      />
 
       <Sideleftbar genres={genres} />
     </Container>

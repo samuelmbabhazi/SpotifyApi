@@ -25,7 +25,7 @@ const Container = styled.div`
   padding: 2rem;
   height: 15vh;
 
-  position: sticky;
+
   top: 0;
   transition: 0.3s ease-in-out;
   background-color: none;
