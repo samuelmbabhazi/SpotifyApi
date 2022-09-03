@@ -6,16 +6,20 @@ function Body({
   playlist,
   items,
   setIdp,
- 
+  setPlaylist,
   tracks,
   setTracks,
   token,
 }) {
-  const [resultSearch, setResultSearch] = useState({listOfTracksSearch:[]});
+  const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
+  setPlaylist(playlist.listOfPlaylistFromAPI=resultSearch.listOfTracksSearch);
 
- useState(()=>{},[resultSearch,search])
- console.log(resultSearch.listOfTracksSearch);
+
+  
+   
+
+
   return (
     <Container>
       {/* <div className="avatar">
@@ -25,6 +29,8 @@ function Body({
         </a>
       </div> */}
       <Navbar
+        setPlaylist={setPlaylist}
+        playlist={playlist}
         search={search}
         token={token}
         setSearch={setSearch}
@@ -65,16 +71,7 @@ function Body({
             </div>
           ))}
         </div>
-        <div className="card">
-        {resultSearch.listOfTracksSearch.map((item, idx) => (
-            <div>
-              <li key={idx}>
-                <img src={item.images[0].url} alt="" />
-               {item.name}
-              </li>
-            </div>
-          ))}
-        </div>
+        
       </div>
     </Container>
   );
@@ -134,7 +131,7 @@ const Container = styled.div`
     border: 1px solid rgb(255, 255, 255, 0.18);
     border-radius: 10px;
 
-    width: 40%;
+    width: 90%;
     height: 400px;
     overflow: auto;
     &::-webkit-scrollbar {

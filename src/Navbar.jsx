@@ -3,13 +3,14 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import axios from "axios";
-function Navbar({ search, setSearch, resultSearch, setResultSearch,token }) {
+function Navbar({ search, setSearch, resultSearch, setResultSearch,token ,playlist,setPlaylist}) {
   const Mysearch = (e) => {
     setSearch(e.target.value);
+  
   };
   const changeContent = (event) => {
     event.preventDefault();
-
+  
     setSearch(search);
     axios(
       `https://api.spotify.com/v1/search?q=${encodeURI(
@@ -25,12 +26,14 @@ function Navbar({ search, setSearch, resultSearch, setResultSearch,token }) {
       setResultSearch({
         listOfTracksSearch: tracksResponse.data.playlists.items,
       });
-    
+     
     });
    
+    
     setSearch("");
   };
-  console.log("fally",resultSearch);
+  
+  
   return (
     <Container>
       <div className="search_bar">

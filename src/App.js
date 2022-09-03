@@ -10,9 +10,6 @@ import Sidebar from "./Sidebar";
 import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
-
- 
-  
   const [ide, setIde] = useState("toplists");
   const [idp, setIdp] = useState("37i9dQZF1DX0XUsuxWHRQd");
 
@@ -76,7 +73,6 @@ const App = () => {
       setPlaylist({
         selectedPlaylist: playlist.selectedPlaylist,
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
-      
       });
       console.log("playlist", playlist.ListOfidPlaylist);
       axios(`https://api.spotify.com/v1/playlists/${idp}/tracks?limit=20`, {
@@ -89,29 +85,23 @@ const App = () => {
           selectedTrack: tracks.selectedTrack,
           listOfTracksFromAPI: tracksResponse.data.items,
         });
-        console.log("ancien",tracksResponse);
+        console.log("ancien", tracksResponse);
       });
-      
     });
-    
+  }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
 
-  }, [ide,idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
-
-  
-  
   return (
     <Container>
       <Sidebar genres={genres} ide={ide} setIde={setIde} />
 
       <Body
         playlist={playlist}
+        setPlaylist={setPlaylist}
         items={tracks.listOfTracksFromAPI}
         setIdp={setIdp}
-
         tracks={tracks}
         setTracks={setTracks}
         token={token}
-      
       />
 
       <Sideleftbar genres={genres} />
