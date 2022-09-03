@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSearch, FaUserCircle } from "react-icons/fa";
+import { FaSearch } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
-function Navbar({ search, setSearch }) {
+import axios from "axios";
+function Navbar({ search, setSearch, resultSearch, setResultSearch,token }) {
   const Mysearch = (e) => {
     setSearch(e.target.value);
   };
@@ -10,9 +11,26 @@ function Navbar({ search, setSearch }) {
     event.preventDefault();
 
     setSearch(search);
-
+    axios(
+      `https://api.spotify.com/v1/search?q=${encodeURI(
+        search
+      )}&type=playlist&limit=15`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ).then((tracksResponse) => {
+      setResultSearch({
+        listOfTracksSearch: tracksResponse.data.playlists.items,
+      });
+    
+    });
+   
     setSearch("");
   };
+  console.log("fally",resultSearch);
   return (
     <Container>
       <div className="search_bar">
@@ -39,7 +57,6 @@ function Navbar({ search, setSearch }) {
           <MdNotifications />
         </span>
       </div>
-    
     </Container>
   );
 }
@@ -54,7 +71,7 @@ const Container = styled.div`
   top: 0;
   transition: 0.3s ease-in-out;
   background-color: none;
-  
+
   button {
     border: none;
     background-color: transparent;

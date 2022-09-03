@@ -1,10 +1,21 @@
-import React from "react";
-import { FaUserCircle } from "react-icons/fa";
+import React, { useState } from "react";
 import { MdQueueMusic } from "react-icons/md";
 import styled from "styled-components";
 import Navbar from "./Navbar";
-function Body({ playlist, items, setIdp, search, setSearch }) {
-  console.log("items :", items);
+function Body({
+  playlist,
+  items,
+  setIdp,
+ 
+  tracks,
+  setTracks,
+  token,
+}) {
+  const [resultSearch, setResultSearch] = useState({listOfTracksSearch:[]});
+  const [search, setSearch] = useState("");
+
+ useState(()=>{},[resultSearch,search])
+ console.log(resultSearch.listOfTracksSearch);
   return (
     <Container>
       {/* <div className="avatar">
@@ -13,7 +24,15 @@ function Body({ playlist, items, setIdp, search, setSearch }) {
           <span></span>
         </a>
       </div> */}
-      <Navbar search={search} setSearch={setSearch} />
+      <Navbar
+        search={search}
+        token={token}
+        setSearch={setSearch}
+        tracks={tracks}
+        setTracks={setTracks}
+        resultSearch={resultSearch}
+        setResultSearch={setResultSearch}
+      />
       <div className="entete">
         <span>POPULAR PLAYLIST</span>
         <span className="detail">SEE DETAIL</span>
@@ -29,12 +48,12 @@ function Body({ playlist, items, setIdp, search, setSearch }) {
           })}
       </ul>
       <div className="tracks">
-      <span className="span">
-        <MdQueueMusic />{" "}
-      </span>{" "}
-      TRACKS
+        <span className="span">
+          <MdQueueMusic />{" "}
+        </span>{" "}
+        TRACKS
       </div>
-      
+
       <div className="contcard">
         <div className="card">
           {items.map((item, idx) => (
@@ -42,6 +61,16 @@ function Body({ playlist, items, setIdp, search, setSearch }) {
               <li key={idx}>
                 <img src={item.track.album.images[0].url} alt="" />
                 {item.track.name}
+              </li>
+            </div>
+          ))}
+        </div>
+        <div className="card">
+        {resultSearch.listOfTracksSearch.map((item, idx) => (
+            <div>
+              <li key={idx}>
+                <img src={item.images[0].url} alt="" />
+               {item.name}
               </li>
             </div>
           ))}
@@ -88,7 +117,7 @@ const Container = styled.div`
   .contcard {
     display: flex;
     justify-content: center;
-    
+
     gap: 2rem;
     overflow: hidden;
   }
@@ -104,8 +133,8 @@ const Container = styled.div`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: 1px solid rgb(255, 255, 255, 0.18);
     border-radius: 10px;
-    padding-left: 3%;
-    width: 90%;
+
+    width: 40%;
     height: 400px;
     overflow: auto;
     &::-webkit-scrollbar {
@@ -123,7 +152,6 @@ const Container = styled.div`
       width: 30px;
       border-radius: 50%;
     }
-    
   }
   .avatar {
     background-color: blue;
@@ -150,12 +178,12 @@ const Container = styled.div`
     }
   }
   .span {
-      font-size: 25px;
-      color: blue;
-    }
-    .tracks{
-margin-top:7%;
-margin-left:3%;
-    }
+    font-size: 25px;
+    color: blue;
+  }
+  .tracks {
+    margin-top: 7%;
+    margin-left: 3%;
+  }
 `;
 export default React.memo(Body);

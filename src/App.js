@@ -11,7 +11,7 @@ import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
 
-  const [search,setSearch]=useState("");
+ 
   
   const [ide, setIde] = useState("toplists");
   const [idp, setIdp] = useState("37i9dQZF1DX0XUsuxWHRQd");
@@ -89,21 +89,15 @@ const App = () => {
           selectedTrack: tracks.selectedTrack,
           listOfTracksFromAPI: tracksResponse.data.items,
         });
+        console.log("ancien",tracksResponse);
       });
+      
     });
-    axios(`https://api.spotify.com/v1/search?q=${encodeURI(search)}&type=artist,track,album,playlist&limit=15e`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }).then((tracksResponse) => {
-        setTracks({
-          selectedTrack: tracks.selectedTrack,
-          listOfTracksFromAPI: tracksResponse.data.items,
-        });
-      });
+    
 
-  }, [search,ide,idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
+  }, [ide,idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
+
+  
   
   return (
     <Container>
@@ -113,8 +107,11 @@ const App = () => {
         playlist={playlist}
         items={tracks.listOfTracksFromAPI}
         setIdp={setIdp}
-        search={search}
-        setSearch={setSearch}
+
+        tracks={tracks}
+        setTracks={setTracks}
+        token={token}
+      
       />
 
       <Sideleftbar genres={genres} />
