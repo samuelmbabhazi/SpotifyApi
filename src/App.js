@@ -104,7 +104,7 @@ const App = () => {
         token={token}
       />
 
-      <Sideleftbar genres={genres} />
+      <Sideleftbar genres={genres} items={tracks.listOfTracksFromAPI}/>
     </Container>
   );
 };

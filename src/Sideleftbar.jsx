@@ -12,6 +12,7 @@ function Sideleftbar({ genres }) {
   return (
     <Container>
       <div className="playing">
+      
         <div className="play">
           <div className="shuffle">
             <MdShuffle />

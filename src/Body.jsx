@@ -13,12 +13,6 @@ function Body({
 }) {
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
-  setPlaylist(playlist.listOfPlaylistFromAPI=resultSearch.listOfTracksSearch);
-
-
-  
-   
-
 
   return (
     <Container>
@@ -53,6 +47,21 @@ function Body({
             );
           })}
       </ul>
+      <br />
+      <div className="entete">
+        <span> Your Search </span>
+      </div>
+
+      <ul className="playlist">
+        {resultSearch.listOfTracksSearch &&
+          resultSearch.listOfTracksSearch.map((image, i) => {
+            return (
+              <li key={i} onClick={() => setIdp(image.id)}>
+                <img src={image.images[0] && image.images[0].url} alt="" />
+              </li>
+            );
+          })}
+      </ul>
       <div className="tracks">
         <span className="span">
           <MdQueueMusic />{" "}
@@ -71,7 +80,6 @@ function Body({
             </div>
           ))}
         </div>
-        
       </div>
     </Container>
   );
