@@ -26,7 +26,7 @@ function Navbar({ search, setSearch, resultSearch, setResultSearch,token ,playli
       setResultSearch({
         listOfTracksSearch: tracksResponse.data.playlists.items,
       });
-     
+      console.log("search:",tracksResponse.data.playlists.items);
     });
    
     

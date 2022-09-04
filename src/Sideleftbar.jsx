@@ -8,11 +8,12 @@ import {
 } from "react-icons/md";
 import styled from "styled-components";
 
-function Sideleftbar({ genres }) {
+function Sideleftbar({ genres, playing, setplaying }) {
   return (
     <Container>
       <div className="playing">
-      
+        <div className="track"></div>
+        <img src={playing} alt="" width={130}/>
         <div className="play">
           <div className="shuffle">
             <MdShuffle />
@@ -54,12 +55,37 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 20vw;
-  background-color:#2D2D2D;
-
+  background-color: #2d2d2d;
+  img{
+  position:absolute;
+  bottom:353.5px;
+  right:74px;
+      border-radius:50%;
+    }
+  .track {
+    width: 130px;
+    height: 130px;
+    margin-right:auto;
+    margin-left:auto;
+    margin-top:30%;
+    border: 2px solid white;
+    border-radius:50%;
+    border-top: #000000;
+    animation: circular-loader 2s linear infinite;
+    
+  }
+  @keyframes circular-loader {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
   .playing {
     border-radius: 10px;
     height: 310px;
-    background-color: #925FF0;
+    background-color: #925ff0;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     .play {
@@ -67,9 +93,9 @@ const Container = styled.div`
       align-items: center;
       justify-content: center;
       gap: 20px;
-      margin-top: 92%;
+      margin-top: 25%;
       height: 20%;
-      background-color: #0B0B0B;
+      background-color: #0b0b0b;
     }
   }
   ul {

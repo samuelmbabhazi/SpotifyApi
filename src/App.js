@@ -15,8 +15,9 @@ const App = () => {
 
   const spotify = Identifiants();
 
-  console.log("RENDERING APP.JS");
-
+  const [playing, setPlaying] = useState(
+    "https://i.scdn.co/image/ab67706c0000bebbc73a0e16d4258621a95e45c8"
+  );
   const [token, setToken] = useState("");
   const [genres, setGenres] = useState({
     selectedGenre: "",
@@ -104,7 +105,12 @@ const App = () => {
         token={token}
       />
 
-      <Sideleftbar genres={genres} items={tracks.listOfTracksFromAPI}/>
+      <Sideleftbar
+        genres={genres}
+        items={tracks.listOfTracksFromAPI}
+        playing={playing}
+        setPlaying={setPlaying}
+      />
     </Container>
   );
 };
