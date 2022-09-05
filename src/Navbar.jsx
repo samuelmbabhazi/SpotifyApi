@@ -11,7 +11,7 @@ function Navbar({ search, setSearch, setResultSearch, token, setYourSearch }) {
     event.preventDefault();
 
     setSearch(search);
-    setYourSearch("Your Search :" + search);
+    setYourSearch("Your Search : " + search);
     axios(
       `https://api.spotify.com/v1/search?q=${encodeURI(
         search
