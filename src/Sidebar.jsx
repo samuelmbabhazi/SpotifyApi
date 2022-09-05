@@ -6,13 +6,11 @@ import {
   MdLibraryMusic,
   MdSettings,
 } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
 
-function Sidebar({ genres, setIde,ide ,onclik}) {
+
+function Sidebar({ genres, setIde,}) {
   console.log(genres.listOfGenresFromAPI);
-const click=e=>{
-  onclik(e.target.value)
-}
+  
   return (
     <Container>
       <div className="top_links">
@@ -61,19 +59,17 @@ const click=e=>{
             <MdSettings />
             <span>Settings</span>
           </li>
-          <li>
-            
-          </li>
+          <li></li>
         </ul>
       </div>
     </Container>
   );
 }
 const Container = styled.div`
-  background-color:#2D2D2D; 
+  background-color: #2d2d2d;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(20px);
-
+  heigth: 100vh;
   display: flex;
   flex-direction: column;
   width: 20vw;
@@ -86,7 +82,7 @@ const Container = styled.div`
     width: 90%;
     margin-left: auto;
     margin-right: auto;
-    background-color: #925FF0;
+    background-color: #925ff0;
   }
   .top_links {
     display: flex;
@@ -121,9 +117,8 @@ const Container = styled.div`
         color: blue;
       }
     }
-    
-    }
-  
+  }
+
   .categorie {
     height: 55vh;
     max-height: 100%;
@@ -136,4 +131,4 @@ const Container = styled.div`
     }
   }
 `;
-export default React.memo (Sidebar);
+export default React.memo(Sidebar);

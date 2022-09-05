@@ -4,16 +4,16 @@ import styled from "styled-components";
 import Navbar from "./Navbar";
 function Body({
   playlist,
-  items,
   setIdp,
   setPlaylist,
   tracks,
   setTracks,
   token,
+  items
 }) {
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
-
+  console.log("playlist", playlist.listOfIdPlaylistFromAPI);
   return (
     <Container>
       {/* <div className="avatar">
@@ -41,12 +41,18 @@ function Body({
         {playlist.listOfPlaylistFromAPI &&
           playlist.listOfPlaylistFromAPI.map((image, i) => {
             return (
-              <li key={i} onClick={() => setIdp(image.id)}>
+              <li
+                key={i}
+                onClick={() => {
+                  setIdp(image.id);
+                }}
+              >
                 <img src={image.images[0] && image.images[0].url} alt="" />
               </li>
             );
           })}
       </ul>
+ 
       <br />
       <div className="entete">
         <span> Your Search </span>
@@ -95,10 +101,11 @@ const Container = styled.div`
       color: #1161e8;
     }
   }
+  
   .playlist {
     margin: 0 2rem;
     display: flex;
-
+    
     align-items: center;
     width: 54vw;
     max-height: 100%;
@@ -149,9 +156,13 @@ const Container = styled.div`
       }
     }
     li {
-      margin-top: 2%;
       margin-bottom: 2%;
       font-size: 12px;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(167, 165, 165, 0.105);
+    }
+    li:hover {
+      color: blue;
     }
     img {
       width: 30px;

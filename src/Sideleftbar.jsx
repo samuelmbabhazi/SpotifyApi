@@ -1,51 +1,17 @@
 import React from "react";
-import {
-  MdPlayArrow,
-  MdReplay,
-  MdShuffle,
-  MdSkipNext,
-  MdSkipPrevious,
-} from "react-icons/md";
+
 import styled from "styled-components";
 
-function Sideleftbar({ genres, playing, setplaying }) {
+function Sideleftbar({ idp }) {
   return (
     <Container>
-      <div className="playing">
-        <div className="track"></div>
-        <img src={playing} alt="" width={130}/>
-        <div className="play">
-          <div className="shuffle">
-            <MdShuffle />
-          </div>
-          <div className="previous">
-            <MdSkipPrevious />
-          </div>
-          <div className="player">
-            <MdPlayArrow />
-          </div>
-          <div className="next">
-            <MdSkipNext />
-          </div>
-          <div className="replay">
-            <MdReplay />
-          </div>
-        </div>
-        <div className="queu">
-          <ul>
-            <span>YOUR QUEUE</span>
-            {genres.listOfIconFromAPi &&
-              genres.listOfIconFromAPi.map((icon, i) => {
-                return (
-                  <li key={i}>
-                    <img src={icon.icon[0] && icon.icon[0].url} alt="" />
-                    {icon.name}
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-      </div>
+      <iframe
+        src={`https://open.spotify.com/embed/playlist/${idp}?utm_source=generator`}
+        frameBorder="0"
+        allowFullScreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+      ></iframe>
     </Container>
   );
 }
@@ -56,35 +22,40 @@ const Container = styled.div`
   flex-direction: column;
   width: 20vw;
   background-color: #2d2d2d;
-  img{
-  position:absolute;
-  bottom:353.5px;
-  right:74px;
-      border-radius:50%;
-    }
+  height: 100vh;
+  iframe {
+    
+    height: 100%;
+  }
+
+  img {
+    position: absolute;
+    bottom: 353.5px;
+    right: 74px;
+    border-radius: 50%;
+  }
   .track {
     width: 130px;
     height: 130px;
-    margin-right:auto;
-    margin-left:auto;
-    margin-top:30%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 30%;
     border: 2px solid white;
-    border-radius:50%;
+    border-radius: 50%;
     border-top: #000000;
     animation: circular-loader 2s linear infinite;
-    
   }
   @keyframes circular-loader {
-  from {
-    transform: rotate(0deg);
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
   .playing {
     border-radius: 10px;
-    height: 310px;
+    height: 400px;
     background-color: #925ff0;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 

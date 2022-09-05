@@ -10,14 +10,12 @@ import Sidebar from "./Sidebar";
 import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
-  const [ide, setIde] = useState("toplists");
+  const [ide, setIde] = useState("hiphop");
   const [idp, setIdp] = useState("37i9dQZF1DX0XUsuxWHRQd");
 
   const spotify = Identifiants();
 
-  const [playing, setPlaying] = useState(
-    "https://i.scdn.co/image/ab67706c0000bebbc73a0e16d4258621a95e45c8"
-  );
+  const [playing, setPlaying] = useState("37i9dQZF1DX6tw5tib6ZrB");
   const [token, setToken] = useState("");
   const [genres, setGenres] = useState({
     selectedGenre: "",
@@ -31,7 +29,7 @@ const App = () => {
     selectedTrack: "",
     listOfTracksFromAPI: [],
   });
-  const [trackDetail, setTrackDetail] = useState(null);
+ 
 
   useEffect(() => {
     axios("https://accounts.spotify.com/api/token", {
@@ -65,17 +63,22 @@ const App = () => {
       });
     });
     axios(
-      `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=15`,
+      `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=8`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
       }
     ).then((playlistResponse) => {
       setPlaylist({
+        listOfIdPlaylistFromAPI: playlistResponse.data.playlists.items.map(
+          (url) => ({
+            id: url.id,
+          })
+        ),
         selectedPlaylist: playlist.selectedPlaylist,
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
       });
-      console.log("playlist", playlist.ListOfidPlaylist);
+
       axios(`https://api.spotify.com/v1/playlists/${idp}/tracks?limit=20`, {
         method: "GET",
         headers: {
@@ -100,6 +103,7 @@ const App = () => {
         setPlaylist={setPlaylist}
         items={tracks.listOfTracksFromAPI}
         setIdp={setIdp}
+        
         tracks={tracks}
         setTracks={setTracks}
         token={token}
@@ -109,6 +113,7 @@ const App = () => {
         genres={genres}
         items={tracks.listOfTracksFromAPI}
         playing={playing}
+        idp={idp}
         setPlaying={setPlaying}
       />
     </Container>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import axios from "axios";
-function Navbar({ search, setSearch, resultSearch, setResultSearch,token ,playlist,setPlaylist}) {
+function Navbar({ search, setSearch, setResultSearch,token ,playlist,setPlaylist}) {
   const Mysearch = (e) => {
     setSearch(e.target.value);
   
@@ -26,7 +26,7 @@ function Navbar({ search, setSearch, resultSearch, setResultSearch,token ,playli
       setResultSearch({
         listOfTracksSearch: tracksResponse.data.playlists.items,
       });
-      console.log("search:",tracksResponse.data.playlists.items);
+    
     });
    
     
