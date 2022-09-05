@@ -12,6 +12,7 @@ import Sideleftbar from "./Sideleftbar";
 const App = () => {
   const [ide, setIde] = useState("hiphop");
   const [idp, setIdp] = useState("37i9dQZF1DX0XUsuxWHRQd");
+  const [yourSearch,setYourSearch]=useState()
 
   const spotify = Identifiants();
 
@@ -59,7 +60,7 @@ const App = () => {
             (genre) => ({ icon: genre.icons, id: genre.id, name: genre.name })
           ),
         });
-        console.log("nouve:", genres.listOfGenresFromAPI);
+       
       });
     });
     axios(
@@ -75,7 +76,7 @@ const App = () => {
             id: url.id,
           })
         ),
-        selectedPlaylist: playlist.selectedPlaylist,
+        
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
       });
 
@@ -103,7 +104,8 @@ const App = () => {
         setPlaylist={setPlaylist}
         items={tracks.listOfTracksFromAPI}
         setIdp={setIdp}
-        
+        yourSearch={yourSearch}
+        setYourSearch={setYourSearch}
         tracks={tracks}
         setTracks={setTracks}
         token={token}

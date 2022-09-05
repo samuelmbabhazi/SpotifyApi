@@ -9,7 +9,9 @@ function Body({
   tracks,
   setTracks,
   token,
-  items
+  items,
+  yourSearch,
+  setYourSearch
 }) {
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
@@ -32,6 +34,7 @@ function Body({
         setTracks={setTracks}
         resultSearch={resultSearch}
         setResultSearch={setResultSearch}
+        setYourSearch={setYourSearch}
       />
       <div className="entete">
         <span>POPULAR PLAYLIST</span>
@@ -55,7 +58,7 @@ function Body({
  
       <br />
       <div className="entete">
-        <span> Your Search </span>
+        <span>{yourSearch}</span>
       </div>
 
       <ul className="playlist">
