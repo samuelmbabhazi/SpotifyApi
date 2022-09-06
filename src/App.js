@@ -11,6 +11,7 @@ import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
   const [ide, setIde] = useState("hiphop");
+  const [type, setType] = useState("playlist");
   const [idp, setIdp] = useState("37i9dQZF1DX6tw5tib6ZrB");
   const [yourSearch, setYourSearch] = useState("POPULAR PLAYLIST");
 
@@ -47,7 +48,7 @@ const App = () => {
       setToken(tokenResponse.data.access_token);
 
       axios(
-        "https://api.spotify.com/v1/browse/categories?locale=sv_US&limit=25",
+        "https://api.spotify.com/v1/browse/categories?locale=sv_US&limit=50",
         {
           method: "GET",
           headers: {
@@ -65,7 +66,7 @@ const App = () => {
       });
 
       axios(
-        "https://api.spotify.com/v1/browse/new-releases?locale=sv_US&limit=25",
+        "https://api.spotify.com/v1/browse/new-releases?locale=sv_US&limit=50",
         {
           method: "GET",
           headers: {
@@ -77,14 +78,14 @@ const App = () => {
           listOfAlbumFromAPI: albumResponse.data.albums.items,
 
           listOfIconAlbumFromAPi: albumResponse.data.albums.items.map(
-            (genre) => ({ icon: genre.images, id: genre.id, name: genre.name })
+            (genre) => ({type:genre.type, icon: genre.images, id: genre.id, name: genre.name })
           ),
         });
       });
     });
 
     axios(
-      `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=8`,
+      `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=50`,
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
@@ -93,14 +94,14 @@ const App = () => {
       setPlaylist({
         listOfIdPlaylistFromAPI: playlistResponse.data.playlists.items.map(
           (url) => ({
-            id: url.id,
+            id: url.id,type:url.type
           })
         ),
 
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
       });
 
-      axios(`https://api.spotify.com/v1/playlists/${idp}/tracks?limit=20`, {
+      axios(`https://api.spotify.com/v1/playlists/${idp}/tracks?limit=50`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token,
@@ -130,6 +131,8 @@ const App = () => {
         tracks={tracks}
         setTracks={setTracks}
         token={token}
+        setIde={setIde}
+        setType={setType}
       />
 
       <Sideleftbar
@@ -137,6 +140,7 @@ const App = () => {
         items={tracks.listOfTracksFromAPI}
         playing={playing}
         idp={idp}
+        type={type}
         setPlaying={setPlaying}
       />
     </Container>

@@ -13,6 +13,8 @@ function Body({
   yourSearch,
   setYourSearch,
   album,
+  setIde,
+  setType
 }) {
   console.log(album);
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
@@ -37,6 +39,7 @@ function Body({
         resultSearch={resultSearch}
         setResultSearch={setResultSearch}
         setYourSearch={setYourSearch}
+        setIde={setIde}
       />
       <div className="entete">
         <span>{yourSearch}</span>
@@ -50,7 +53,7 @@ function Body({
               <li
                 key={i}
                 onClick={() => {
-                  setIdp(image.id);
+                  setIdp(image.id);setType(image.type);
                 }}
               >
                 <img src={image.images[0] && image.images[0].url} alt="" />
@@ -70,7 +73,7 @@ function Body({
               <li
                 key={i}
                 onClick={() => {
-                  setIdp(image.id);
+                  setIdp(image.id);setType(image.type);
                 }}
               >
                 <img src={image.icon[0] && image.icon[0].url} alt="" />

@@ -10,7 +10,9 @@ function Navbar({
   token,
   setYourSearch,
   setPlaylist,
+  setIde,
 }) {
+  let playlistmap;
   const Mysearch = (e) => {
     setSearch(e.target.value);
   };
@@ -22,7 +24,7 @@ function Navbar({
     axios(
       `https://api.spotify.com/v1/search?q=${encodeURI(
         search
-      )}&type=playlist&limit=15`,
+      )}&type=track,artist,album,playlist&limit=50`,
       {
         method: "GET",
         headers: {
@@ -30,15 +32,16 @@ function Navbar({
         },
       }
     ).then((tracksResponse) => {
-      setPlaylist({
-        listOfIdPlaylistFromAPI: tracksResponse.data.playlists.items.map(
-          (url) => ({
-            id: url.id,
-          })
-        ),
+      (playlistmap = tracksResponse.data.playlists.items.map((url) => ({
+        id: url.id,
+        type: url.type,
+      }))),
+        setPlaylist({
+          listOfIdPlaylistFromAPI: playlistmap,
 
-        listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
-      });
+          listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
+        });
+      setIde(playlistmap.id);
     });
 
     setSearch("");
