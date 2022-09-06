@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 
 
-function Sidebar({ genres, setIde,}) {
+function Sidebar({ genres, setIde,setYourSearch}) {
   console.log(genres.listOfGenresFromAPI);
   
   return (
@@ -40,7 +40,7 @@ function Sidebar({ genres, setIde,}) {
           {genres.listOfIconFromAPi &&
             genres.listOfIconFromAPi.map((icon, i) => {
               return (
-                <li key={i} value={icon.id} onClick={() => setIde(icon.id)}>
+                <li key={i} value={icon.id} onClick={() =>{setIde(icon.id);setYourSearch("POPULAR PLAYLIST")}}>
                   <img
                     src={icon.icon[0] && icon.icon[0].url}
                     width={30}

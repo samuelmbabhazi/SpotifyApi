@@ -3,7 +3,14 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import axios from "axios";
-function Navbar({ search, setSearch, setResultSearch, token, setYourSearch }) {
+function Navbar({
+  search,
+  setSearch,
+  setResultSearch,
+  token,
+  setYourSearch,
+  setPlaylist,
+}) {
   const Mysearch = (e) => {
     setSearch(e.target.value);
   };
@@ -23,8 +30,14 @@ function Navbar({ search, setSearch, setResultSearch, token, setYourSearch }) {
         },
       }
     ).then((tracksResponse) => {
-      setResultSearch({
-        listOfTracksSearch: tracksResponse.data.playlists.items,
+      setPlaylist({
+        listOfIdPlaylistFromAPI: tracksResponse.data.playlists.items.map(
+          (url) => ({
+            id: url.id,
+          })
+        ),
+
+        listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
       });
     });
 

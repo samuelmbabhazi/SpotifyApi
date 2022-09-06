@@ -11,8 +11,8 @@ import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
   const [ide, setIde] = useState("hiphop");
-  const [idp, setIdp] = useState("37i9dQZF1DX0XUsuxWHRQd");
-  const [yourSearch,setYourSearch]=useState()
+  const [idp, setIdp] = useState("37i9dQZF1DX6tw5tib6ZrB");
+  const [yourSearch, setYourSearch] = useState("POPULAR PLAYLIST");
 
   const spotify = Identifiants();
 
@@ -22,6 +22,9 @@ const App = () => {
     selectedGenre: "",
     listOfGenresFromAPI: [],
   });
+  const [album, setAlbum] = useState({
+    listOfAlbumFromAPI: [],
+  });
   const [playlist, setPlaylist] = useState({
     selectedPlaylist: "",
     listOfPlaylistFromAPI: [],
@@ -30,7 +33,6 @@ const App = () => {
     selectedTrack: "",
     listOfTracksFromAPI: [],
   });
- 
 
   useEffect(() => {
     axios("https://accounts.spotify.com/api/token", {
@@ -60,9 +62,27 @@ const App = () => {
             (genre) => ({ icon: genre.icons, id: genre.id, name: genre.name })
           ),
         });
-       
+      });
+
+      axios(
+        "https://api.spotify.com/v1/browse/new-releases?locale=sv_US&limit=25",
+        {
+          method: "GET",
+          headers: {
+            Authorization: "Bearer " + tokenResponse.data.access_token,
+          },
+        }
+      ).then((albumResponse) => {
+        setAlbum({
+          listOfAlbumFromAPI: albumResponse.data.albums.items,
+
+          listOfIconAlbumFromAPi: albumResponse.data.albums.items.map(
+            (genre) => ({ icon: genre.images, id: genre.id, name: genre.name })
+          ),
+        });
       });
     });
+
     axios(
       `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=8`,
       {
@@ -76,7 +96,7 @@ const App = () => {
             id: url.id,
           })
         ),
-        
+
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
       });
 
@@ -97,9 +117,10 @@ const App = () => {
 
   return (
     <Container>
-      <Sidebar genres={genres} ide={ide} setIde={setIde} />
+      <Sidebar genres={genres} ide={ide} setIde={setIde} setYourSearch={setYourSearch}/>
 
       <Body
+        album={album}
         playlist={playlist}
         setPlaylist={setPlaylist}
         items={tracks.listOfTracksFromAPI}

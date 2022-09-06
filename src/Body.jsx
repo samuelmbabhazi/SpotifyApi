@@ -11,8 +11,10 @@ function Body({
   token,
   items,
   yourSearch,
-  setYourSearch
+  setYourSearch,
+  album,
 }) {
+  console.log(album);
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
   console.log("playlist", playlist.listOfIdPlaylistFromAPI);
@@ -37,7 +39,8 @@ function Body({
         setYourSearch={setYourSearch}
       />
       <div className="entete">
-        <span>POPULAR PLAYLIST</span>
+        <span>{yourSearch}</span>
+
         <span className="detail">SEE DETAIL</span>
       </div>
       <ul className="playlist">
@@ -55,30 +58,55 @@ function Body({
             );
           })}
       </ul>
- 
       <br />
       <div className="entete">
-        <span>{yourSearch}</span>
+        <span>POPULAR ALBUM</span>
       </div>
 
       <ul className="playlist">
-        {resultSearch.listOfTracksSearch &&
-          resultSearch.listOfTracksSearch.map((image, i) => {
+        {album.listOfIconAlbumFromAPi &&
+          album.listOfIconAlbumFromAPi.map((image, i) => {
             return (
-              <li key={i} onClick={() => setIdp(image.id)}>
-                <img src={image.images[0] && image.images[0].url} alt="" />
+              <li
+                key={i}
+                onClick={() => {
+                  setIdp(image.id);
+                }}
+              >
+                <img src={image.icon[0] && image.icon[0].url} alt="" />
               </li>
             );
           })}
       </ul>
-      <div className="tracks">
+      <br />
+      <div className="entete">
+        <span>POPULAR ALBUM</span>
+      </div>
+
+      <ul className="playlist">
+        {album.listOfIconAlbumFromAPi &&
+          album.listOfIconAlbumFromAPi.map((image, i) => {
+            return (
+              <li
+                key={i}
+                onClick={() => {
+                  setIdp(image.id);
+                }}
+              >
+                <img src={image.icon[0] && image.icon[0].url} alt="" />
+              </li>
+            );
+          })}
+      </ul>
+
+      {/* <div className="tracks">
         <span className="span">
           <MdQueueMusic />{" "}
         </span>{" "}
         TRACKS
-      </div>
+      </div> */}
 
-      <div className="contcard">
+      {/* <div className="contcard">
         <div className="card">
           {items.map((item, idx) => (
             <div>
@@ -89,7 +117,7 @@ function Body({
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
     </Container>
   );
 }
@@ -104,11 +132,11 @@ const Container = styled.div`
       color: #1161e8;
     }
   }
-  
+
   .playlist {
     margin: 0 2rem;
     display: flex;
-    
+    padding-bottom: 10px;
     align-items: center;
     width: 54vw;
     max-height: 100%;
@@ -121,6 +149,7 @@ const Container = styled.div`
     }
     gap: 1rem;
     li {
+      padding-bottom: 0.5rem;
       list-style: none;
       img {
         height: 11rem;
