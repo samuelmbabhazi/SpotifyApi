@@ -10,6 +10,7 @@ import Sidebar from "./Sidebar";
 import Sideleftbar from "./Sideleftbar";
 
 const App = () => {
+  let trackmap;
   const [ide, setIde] = useState("hiphop");
   const [type, setType] = useState("playlist");
   const [idp, setIdp] = useState("37i9dQZF1DX6tw5tib6ZrB");
@@ -30,6 +31,10 @@ const App = () => {
     selectedPlaylist: "",
     listOfPlaylistFromAPI: [],
   });
+const [track,setTrack]=useState({
+listOfTrackFromAPI:[]
+})
+
   const [tracks, setTracks] = useState({
     selectedTrack: "",
     listOfTracksFromAPI: [],
@@ -83,7 +88,28 @@ const App = () => {
         });
       });
     });
+    axios(
+      `https://api.spotify.com/v1/search?q=2022&type=track&limit=50`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      }
+    ).then((tracksResponse) => {
+      (trackmap = tracksResponse.data.tracks.items.map((url) => ({
+        id: url.id,
+        type: url.type,
+      }))),
+        setTrack({
+          listOfTrackIdFromAPI: trackmap,
 
+          listOfTrackFromAPI: tracksResponse.data.tracks.items,
+        });
+        console.log("track",tracksResponse);
+    });
+
+   
     axios(
       `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=50`,
       {
@@ -129,6 +155,7 @@ const App = () => {
         yourSearch={yourSearch}
         setYourSearch={setYourSearch}
         tracks={tracks}
+        track={track}
         setTracks={setTracks}
         token={token}
         setIde={setIde}

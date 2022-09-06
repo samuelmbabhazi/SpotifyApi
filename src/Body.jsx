@@ -9,14 +9,14 @@ function Body({
   tracks,
   setTracks,
   token,
-  items,
+  track,
   yourSearch,
   setYourSearch,
   album,
   setIde,
   setType
 }) {
-  console.log(album);
+  console.log("newtrack",track);
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
   console.log("playlist", playlist.listOfIdPlaylistFromAPI);
@@ -83,20 +83,20 @@ function Body({
       </ul>
       <br />
       <div className="entete">
-        <span>POPULAR ALBUM</span>
+        <span>POPULAR TRACK</span>
       </div>
 
       <ul className="playlist">
-        {album.listOfIconAlbumFromAPi &&
-          album.listOfIconAlbumFromAPi.map((image, i) => {
+        {track.listOfTrackFromAPI &&
+          track.listOfTrackFromAPI.map((image, i) => {
             return (
               <li
                 key={i}
                 onClick={() => {
-                  setIdp(image.id);
+                  setIdp(image.id),setType(image.type)
                 }}
               >
-                <img src={image.icon[0] && image.icon[0].url} alt="" />
+                <img src={image.album.images[0] && image.album.images[0].url} alt="" />
               </li>
             );
           })}
