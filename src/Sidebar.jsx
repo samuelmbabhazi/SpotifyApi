@@ -120,7 +120,7 @@ const Container = styled.div`
   }
 
   .categorie {
-    height: 55vh;
+    height: 65vh;
     max-height: 100%;
     overflow: auto;
     &::-webkit-scrollbar {

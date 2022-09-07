@@ -14,9 +14,18 @@ function Body({
   setYourSearch,
   album,
   setIde,
-  setType
+  setType,
+  setAlbumSearch,
+  setTrackSearch,
+  albumSearch,
+  trackSearch,
+  setIdq,
+  setYourSearchAlbum,
+  setYourSearchTrack,
+  yourSearchALbum,
+  yourSearchTrack,
 }) {
-  console.log("newtrack",track);
+  console.log("newtrack", track);
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
   console.log("playlist", playlist.listOfIdPlaylistFromAPI);
@@ -40,6 +49,12 @@ function Body({
         setResultSearch={setResultSearch}
         setYourSearch={setYourSearch}
         setIde={setIde}
+        setAlbumSearch={setAlbumSearch}
+        setTrackSearch={setTrackSearch}
+        album={album}
+        setIdq={setIdq}
+        setYourSearchAlbum={setYourSearchAlbum}
+        setYourSearchTrack={setYourSearchTrack}
       />
       <div className="entete">
         <span>{yourSearch}</span>
@@ -53,10 +68,59 @@ function Body({
               <li
                 key={i}
                 onClick={() => {
-                  setIdp(image.id);setType(image.type);
+                  setIdp(image.id);
+                  setType(image.type);
                 }}
               >
                 <img src={image.images[0] && image.images[0].url} alt="" />
+              {image.name}
+              </li>
+            );
+          })}
+      </ul>
+      <br />
+      <div className="entete">
+        <span>{yourSearchALbum}</span>
+      </div>
+
+      <ul className="playlist">
+        {albumSearch.listOfIconAlbumFromAPiSearch &&
+          albumSearch.listOfIconAlbumFromAPiSearch.map((image, i) => {
+            return (
+              <li
+                key={i}
+                onClick={() => {
+                  setIdp(image.id);
+                  setType(image.type);
+                }}
+              >
+                <img src={image.icon[0] && image.icon[0].url} alt="" />
+              {image.name}
+              </li>
+            );
+          })}
+      </ul>
+      <br />
+      <div className="entete">
+        <span>{yourSearchTrack}</span>
+      </div>
+
+      <ul className="playlist">
+        {trackSearch.listOfTrackFromAPISearch &&
+          trackSearch.listOfTrackFromAPISearch.map((image, i) => {
+            return (
+              <li
+                key={i}
+                onClick={() => {
+                  setIdp(image.id);
+                  setType(image.type);
+                }}
+              >
+                <img
+                  src={image.album.images[0] && image.album.images[0].url}
+                  alt=""
+                />
+                {image.album.name}
               </li>
             );
           })}
@@ -73,10 +137,12 @@ function Body({
               <li
                 key={i}
                 onClick={() => {
-                  setIdp(image.id);setType(image.type);
+                  setIdp(image.id);
+                  setType(image.type);
                 }}
               >
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
+             {image.name}
               </li>
             );
           })}
@@ -93,10 +159,14 @@ function Body({
               <li
                 key={i}
                 onClick={() => {
-                  setIdp(image.id),setType(image.type)
+                  setIdp(image.id), setType(image.type);
                 }}
               >
-                <img src={image.album.images[0] && image.album.images[0].url} alt="" />
+                <img
+                  src={image.album.images[0] && image.album.images[0].url}
+                  alt=""
+                />
+                {image.album.name}
               </li>
             );
           })}

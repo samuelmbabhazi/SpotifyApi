@@ -11,8 +11,13 @@ function Navbar({
   setYourSearch,
   setPlaylist,
   setIde,
+  setAlbumSearch,
+  setTrackSearch,
+  setYourSearchAlbum,
+  setYourSearchTrack
 }) {
   let playlistmap;
+  let trackmap;
   const Mysearch = (e) => {
     setSearch(e.target.value);
   };
@@ -20,7 +25,9 @@ function Navbar({
     event.preventDefault();
 
     setSearch(search);
-    setYourSearch("Your Search : " + search);
+     setYourSearch("PLAYLIST : " + search);
+    setYourSearchAlbum("ALBUM : " + search);
+    setYourSearchTrack("TRACK : " + search);
     axios(
       `https://api.spotify.com/v1/search?q=${encodeURI(
         search
@@ -36,12 +43,36 @@ function Navbar({
         id: url.id,
         type: url.type,
       }))),
-        setPlaylist({
-          listOfIdPlaylistFromAPI: playlistmap,
+        setIde(playlistmap.id);
+      setPlaylist({
+        listOfIdPlaylistFromAPI: playlistmap,
 
-          listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
-        });
-      setIde(playlistmap.id);
+        listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
+      });
+      setAlbumSearch({
+        listOfAlbumFromAPISearch: tracksResponse.data.albums.items,
+
+        listOfIconAlbumFromAPiSearch: tracksResponse.data.albums.items.map(
+          (genre) => ({
+            type: genre.type,
+            icon: genre.images,
+            id: genre.id,
+            name: genre.name,
+          })
+        ),
+      });
+      (trackmap = tracksResponse.data.tracks.items.map((urle) => ({
+        id: urle.id,
+        type: urle.type,
+      }))),
+        console.log(trackmap.id);
+        setTrackSearch({
+        listOfTrackIdFromAPISearch: trackmap,
+
+        listOfTrackFromAPISearch: tracksResponse.data.tracks.items,
+      });
+
+      setIde(trackmap.id);
     });
 
     setSearch("");

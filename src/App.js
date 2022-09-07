@@ -14,7 +14,10 @@ const App = () => {
   const [ide, setIde] = useState("hiphop");
   const [type, setType] = useState("playlist");
   const [idp, setIdp] = useState("37i9dQZF1DX6tw5tib6ZrB");
+  const [idq,setIdq]=useState("2022")
   const [yourSearch, setYourSearch] = useState("POPULAR PLAYLIST");
+  const [yourSearchALbum, setYourSearchALbum] = useState();
+  const [yourSearchTrack, setYourSearchTrack] = useState();
 
   const spotify = Identifiants();
 
@@ -27,13 +30,19 @@ const App = () => {
   const [album, setAlbum] = useState({
     listOfAlbumFromAPI: [],
   });
+  const [albumSearch, setAlbumSearch] = useState({
+    listOfAlbumFromAPISearch: [],
+  });
+  const [trackSearch, setTrackSearch] = useState({
+    listOfTrackFromAPISearch: [],
+  });
   const [playlist, setPlaylist] = useState({
     selectedPlaylist: "",
     listOfPlaylistFromAPI: [],
   });
-const [track,setTrack]=useState({
-listOfTrackFromAPI:[]
-})
+  const [track, setTrack] = useState({
+    listOfTrackFromAPI: [],
+  });
 
   const [tracks, setTracks] = useState({
     selectedTrack: "",
@@ -83,20 +92,22 @@ listOfTrackFromAPI:[]
           listOfAlbumFromAPI: albumResponse.data.albums.items,
 
           listOfIconAlbumFromAPi: albumResponse.data.albums.items.map(
-            (genre) => ({type:genre.type, icon: genre.images, id: genre.id, name: genre.name })
+            (genre) => ({
+              type: genre.type,
+              icon: genre.images,
+              id: genre.id,
+              name: genre.name,
+            })
           ),
         });
       });
     });
-    axios(
-      `https://api.spotify.com/v1/search?q=2022&type=track&limit=50`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }
-    ).then((tracksResponse) => {
+    axios(`https://api.spotify.com/v1/search?q=${idq}&type=track&limit=50`, {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    }).then((tracksResponse) => {
       (trackmap = tracksResponse.data.tracks.items.map((url) => ({
         id: url.id,
         type: url.type,
@@ -106,10 +117,9 @@ listOfTrackFromAPI:[]
 
           listOfTrackFromAPI: tracksResponse.data.tracks.items,
         });
-        console.log("track",tracksResponse);
+      console.log("track", tracksResponse);
     });
 
-   
     axios(
       `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=50`,
       {
@@ -120,7 +130,8 @@ listOfTrackFromAPI:[]
       setPlaylist({
         listOfIdPlaylistFromAPI: playlistResponse.data.playlists.items.map(
           (url) => ({
-            id: url.id,type:url.type
+            id: url.id,
+            type: url.type,
           })
         ),
 
@@ -144,9 +155,15 @@ listOfTrackFromAPI:[]
 
   return (
     <Container>
-      <Sidebar genres={genres} ide={ide} setIde={setIde} setYourSearch={setYourSearch}/>
+      <Sidebar
+        genres={genres}
+        ide={ide}
+        setIde={setIde}
+        setYourSearch={setYourSearch}
+      />
 
       <Body
+        setAlbum={setAlbum}
         album={album}
         playlist={playlist}
         setPlaylist={setPlaylist}
@@ -160,6 +177,16 @@ listOfTrackFromAPI:[]
         token={token}
         setIde={setIde}
         setType={setType}
+        setTrack={setTrack}
+        setIdq={setIdq}
+        setTrackSearch={setTrackSearch}
+        setAlbumSearch={setAlbumSearch}
+        albumSearch={albumSearch}
+        trackSearch={trackSearch}
+        yourSearchALbum={yourSearchALbum}
+        yourSearchTrack={yourSearchTrack}
+        setYourSearchAlbum={setYourSearchALbum}
+        setYourSearchTrack={setYourSearchTrack}
       />
 
       <Sideleftbar
@@ -175,5 +202,11 @@ listOfTrackFromAPI:[]
 };
 const Container = styled.div`
   display: flex;
+  ${
+    "" /* @media (max-width: 900px) {
+ flex-direction:column;
+ 
+} */
+  }
 `;
 export default React.memo(App);
