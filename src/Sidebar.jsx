@@ -7,14 +7,18 @@ import {
   MdSettings,
 } from "react-icons/md";
 
-
-function Sidebar({ genres, setIde,setYourSearch}) {
+function Sidebar({ genres, setIde, setYourSearch }) {
   console.log(genres.listOfGenresFromAPI);
-  
+
   return (
     <Container>
       <div className="top_links">
-        <div className="logo">
+        <div
+          className="logo"
+          onClick={() => {
+            window.location.reload();
+          }}
+        >
           <img src="logo.png" alt="" width={130} />
         </div>
         <div className="line"></div>
@@ -40,7 +44,14 @@ function Sidebar({ genres, setIde,setYourSearch}) {
           {genres.listOfIconFromAPi &&
             genres.listOfIconFromAPi.map((icon, i) => {
               return (
-                <li key={i} value={icon.id} onClick={() =>{setIde(icon.id);setYourSearch("POPULAR PLAYLIST")}}>
+                <li
+                  key={i}
+                  value={icon.id}
+                  onClick={() => {
+                    setIde(icon.id);
+                    setYourSearch("POPULAR PLAYLIST");
+                  }}
+                >
                   <img
                     src={icon.icon[0] && icon.icon[0].url}
                     width={30}
@@ -88,10 +99,12 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     .logo {
+
       text-align: center;
       margin: 1rem 0;
     }
     img {
+      cursor:pointer;
       max-inline-size: 80%;
       block-size: auto;
     }

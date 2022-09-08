@@ -31,7 +31,6 @@ function Body({
   console.log("playlist", playlist.listOfIdPlaylistFromAPI);
   return (
     <Container>
-      
       <Navbar
         setPlaylist={setPlaylist}
         playlist={playlist}
@@ -226,6 +225,10 @@ const Container = styled.div`
         cursor: pointer;
       }
     }
+    li:hover {
+      transition:0.7s;
+      transform: scale(1.1);
+    }
   }
   .contcard {
     display: flex;
@@ -270,7 +273,7 @@ const Container = styled.div`
       border-radius: 50%;
     }
   }
- 
+
   .span {
     font-size: 25px;
     color: blue;
