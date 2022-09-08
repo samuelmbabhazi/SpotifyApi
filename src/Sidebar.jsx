@@ -83,6 +83,7 @@ const Container = styled.div`
   heigth: 100vh;
   display: flex;
   flex-direction: column;
+  margin-top:-30px;
   width: 20vw;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   overflow: hidden;

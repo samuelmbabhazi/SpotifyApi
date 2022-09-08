@@ -3,6 +3,7 @@ import { MdQueueMusic } from "react-icons/md";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 function Body({
+  user,
   playlist,
   setIdp,
   setPlaylist,
@@ -49,6 +50,7 @@ function Body({
         setIdq={setIdq}
         setYourSearchAlbum={setYourSearchAlbum}
         setYourSearchTrack={setYourSearchTrack}
+        user={user}
       />
       <div className="entete">
         <span>{yourSearch}</span>

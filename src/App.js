@@ -8,6 +8,7 @@ import Body from "./Body";
 
 import Sidebar from "./Sidebar";
 import Sideleftbar from "./Sideleftbar";
+import jwtDecode from "jwt-decode";
 
 const App = () => {
   let trackmap;
@@ -49,7 +50,32 @@ const App = () => {
     listOfTracksFromAPI: [],
   });
 
+  const [user,setUser]=useState({})
+ 
+
+function handleCallbackResponse(response){
+ console.log("Encoded JWT ID token: " + response.credential);
+ var userObject=jwtDecode(response.credential)
+ console.log(userObject);
+ setUser(userObject)
+ document.getElementById("signInDiv").hidden=true;
+}
+function handleSignOut(event){
+  setUser({})
+  document.getElementById("signInDiv").hidden=false;
+}
   useEffect(() => {
+/*global google */
+google.accounts.id.initialize({
+  client_id:"335727433102-geo6pedmit8njss3hhe7nh6gfbkpt79a.apps.googleusercontent.com",
+  callback:handleCallbackResponse
+})
+google.accounts.id.renderButton(
+  document.getElementById("signInDiv"),
+  {theme:"outline",size:"large"}
+)
+google.accounts.id.prompt();
+console.log("user",user);
     axios("https://accounts.spotify.com/api/token", {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -154,7 +180,20 @@ const App = () => {
   }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
 
   return (
-    <Container>
+   <div>
+    <div id="signInDiv">
+      <img src="logo.png" alt="" />
+    </div>
+    <div className="signout">
+    {
+      Object.keys(user).length !== 0 &&
+      <button className="button" onClick={(e)=>handleSignOut(e)}>Sign Out</button>
+    }
+    </div>
+  
+    
+    {Object.keys(user).length !== 0 && 
+      <Container>
       <Sidebar
         genres={genres}
         ide={ide}
@@ -187,6 +226,7 @@ const App = () => {
         yourSearchTrack={yourSearchTrack}
         setYourSearchAlbum={setYourSearchALbum}
         setYourSearchTrack={setYourSearchTrack}
+        user={user}
       />
 
       <Sideleftbar
@@ -198,9 +238,13 @@ const App = () => {
         setPlaying={setPlaying}
       />
     </Container>
+    }
+
+    </div>
   );
 };
 const Container = styled.div`
+
   display: flex;
   
 @media (max-width: 900px) {

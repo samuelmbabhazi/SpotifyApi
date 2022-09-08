@@ -4,6 +4,7 @@ import { FaSearch, FaUserCircle } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import axios from "axios";
 function Navbar({
+  user,
   search,
   setSearch,
   setResultSearch,
@@ -100,8 +101,8 @@ function Navbar({
       </div>
 { <div className="avatar">
         <a href="#">
-          <FaUserCircle/>
-          <span></span>
+          <img src={user.picture} alt="" width={25}/>
+          <span>{user.name}</span>
         </a>
       </div> }
       {/* <div className="notification">
@@ -177,7 +178,7 @@ const Container = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 40px;
+    width: 110px;
     margin-left: auto;
     margin-top: 15px;
 
@@ -188,8 +189,13 @@ const Container = styled.div`
       text-decoration: none;
       color: white;
       font-weight: bold;
-      svg {
-        font-size: 1.5rem;
+      img {
+        border-radius:50%;
+      }
+      span{
+        display:flex;
+        justify-content:center;
+        font-size:9px;
       }
     }
   }
