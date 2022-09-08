@@ -130,5 +130,29 @@ const Container = styled.div`
       }
     }
   }
+  @media (max-width: 900px) {
+    display:flex;
+ flex-direction:row;
+ width:100%;
+ ul {
+    list-style-type: none;
+    display: flex;
+
+    padding: 1rem;
+
+    li {
+      display: flex;
+      gap: 1rem;
+      cursor: pointer;
+      transition: color 0.3s ease-in-out;
+
+      font-size: 15px;
+      &:hover {
+        border-left: 2px solid blue;
+        color: blue;
+      }
+    }
+   
+} 
 `;
 export default React.memo(Sidebar);

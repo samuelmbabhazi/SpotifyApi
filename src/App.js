@@ -202,11 +202,11 @@ const App = () => {
 };
 const Container = styled.div`
   display: flex;
-  ${
-    "" /* @media (max-width: 900px) {
+  
+@media (max-width: 900px) {
  flex-direction:column;
  
-} */
-  }
+} 
+  
 `;
 export default React.memo(App);

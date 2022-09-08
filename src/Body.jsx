@@ -31,12 +31,7 @@ function Body({
   console.log("playlist", playlist.listOfIdPlaylistFromAPI);
   return (
     <Container>
-      {/* <div className="avatar">
-        <a href="#">
-          <FaUserCircle/>
-          <span></span>
-        </a>
-      </div> */}
+      
       <Navbar
         setPlaylist={setPlaylist}
         playlist={playlist}
@@ -73,7 +68,7 @@ function Body({
                 }}
               >
                 <img src={image.images[0] && image.images[0].url} alt="" />
-              {image.name}
+                {image.name}
               </li>
             );
           })}
@@ -95,7 +90,7 @@ function Body({
                 }}
               >
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
-              {image.name}
+                {image.name}
               </li>
             );
           })}
@@ -142,7 +137,7 @@ function Body({
                 }}
               >
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
-             {image.name}
+                {image.name}
               </li>
             );
           })}
@@ -224,6 +219,7 @@ const Container = styled.div`
     li {
       padding-bottom: 0.5rem;
       list-style: none;
+      font-size: 12px;
       img {
         height: 11rem;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -274,30 +270,7 @@ const Container = styled.div`
       border-radius: 50%;
     }
   }
-  .avatar {
-    background-color: blue;
-    padding: 0.3rem 0.4rem;
-    padding-right: 1rem;
-    border-radius: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    margin-left: auto;
-    margin-top: 15px;
-
-    a {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-      svg {
-        font-size: 1.3rem;
-      }
-    }
-  }
+ 
   .span {
     font-size: 25px;
     color: blue;

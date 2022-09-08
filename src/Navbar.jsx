@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
 import { MdNotifications } from "react-icons/md";
 import axios from "axios";
 function Navbar({
@@ -98,12 +98,17 @@ function Navbar({
           </div>
         </form>
       </div>
-
-      <div className="notification">
+{ <div className="avatar">
+        <a href="#">
+          <FaUserCircle/>
+          <span></span>
+        </a>
+      </div> }
+      {/* <div className="notification">
         <span>
           <MdNotifications />
         </span>
-      </div>
+      </div> */}
     </Container>
   );
 }
@@ -162,6 +167,30 @@ const Container = styled.div`
     span {
       font-size: 20px;
       color: blue;
+    }
+  }
+  .avatar {
+    background-color: blue;
+    padding: 0.3rem 0.4rem;
+    padding-right: 2rem;
+    border-radius: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    margin-left: auto;
+    margin-top: 15px;
+
+    a {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: white;
+      font-weight: bold;
+      svg {
+        font-size: 1.5rem;
+      }
     }
   }
 `;

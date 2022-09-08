@@ -98,5 +98,9 @@ const Container = styled.div`
       }
     }
   }
+  @media (max-width: 900px) {
+ display:none;
+ 
+} 
 `;
 export default Sideleftbar;
