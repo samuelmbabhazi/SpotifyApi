@@ -77,7 +77,7 @@ const App = () => {
       theme: "outline",
       size: "large",
     });
-    google.accounts.id.prompt();
+
     console.log("user", user);
 
     axios("https://accounts.spotify.com/api/token", {
@@ -183,7 +183,7 @@ const App = () => {
   }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
 
   return (
-    <div>
+    <div id="home">
       <div id="connexion" className="connexion">
         <div className="text">
           <h1>find and listen your favorite artist</h1>
@@ -201,7 +201,7 @@ const App = () => {
       </div>
 
       {Object.keys(user).length !== 0 && (
-        <Container id="home">
+        <Container>
           <Sidebar
             genres={genres}
             ide={ide}
