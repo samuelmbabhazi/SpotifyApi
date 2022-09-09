@@ -11,7 +11,6 @@ import Sideleftbar from "./Sideleftbar";
 import jwtDecode from "jwt-decode";
 
 const App = () => {
-  let trackmap;
   const [ide, setIde] = useState("hiphop");
   const [type, setType] = useState("playlist");
   const [idp, setIdp] = useState("37i9dQZF1DX6tw5tib6ZrB");
@@ -139,15 +138,14 @@ const App = () => {
         Authorization: "Bearer " + token,
       },
     }).then((tracksResponse) => {
-      (trackmap = tracksResponse.data.tracks.items.map((url) => ({
-        id: url.id,
-        type: url.type,
-      }))),
-        setTrack({
-          listOfTrackIdFromAPI: trackmap,
+      setTrack({
+        listOfTrackIdFromAPI: tracksResponse.data.tracks.items.map((url) => ({
+          id: url.id,
+          type: url.type,
+        })),
 
-          listOfTrackFromAPI: tracksResponse.data.tracks.items,
-        });
+        listOfTrackFromAPI: tracksResponse.data.tracks.items,
+      });
       console.log("track", tracksResponse);
     });
 
@@ -256,7 +254,7 @@ const Container = styled.div`
   display: flex;
 
   @media (max-width: 900px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 `;
 export default React.memo(App);

@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 
-function Sideleftbar({ idp,type }) {
+function Sideleftbar({ idp, type }) {
   return (
     <Container>
       <iframe
@@ -24,7 +24,6 @@ const Container = styled.div`
   background-color: #2d2d2d;
   height: 128vh;
   iframe {
-    
     height: 100%;
   }
 
@@ -99,8 +98,10 @@ const Container = styled.div`
     }
   }
   @media (max-width: 900px) {
- display:none;
- 
-} 
+    height: 170px;
+    width: 80%;
+
+    margin-left: 10%;
+  }
 `;
 export default Sideleftbar;

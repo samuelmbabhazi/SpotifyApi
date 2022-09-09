@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { FaSearch, FaUserCircle } from "react-icons/fa";
-import { MdNotifications } from "react-icons/md";
+import { FaSearch } from "react-icons/fa";
+
 import axios from "axios";
 function Navbar({
   user,
   search,
   setSearch,
-  setResultSearch,
+  trackSearch,
   token,
   setYourSearch,
   setPlaylist,
@@ -15,10 +15,9 @@ function Navbar({
   setAlbumSearch,
   setTrackSearch,
   setYourSearchAlbum,
-  setYourSearchTrack
+  setYourSearchTrack,
+  playlist,
 }) {
-  let playlistmap;
-  let trackmap;
   const Mysearch = (e) => {
     setSearch(e.target.value);
   };
@@ -26,7 +25,7 @@ function Navbar({
     event.preventDefault();
 
     setSearch(search);
-     setYourSearch("PLAYLIST : " + search);
+    setYourSearch("PLAYLIST : " + search);
     setYourSearchAlbum("ALBUM : " + search);
     setYourSearchTrack("TRACK : " + search);
     axios(
@@ -40,16 +39,17 @@ function Navbar({
         },
       }
     ).then((tracksResponse) => {
-      (playlistmap = tracksResponse.data.playlists.items.map((url) => ({
-        id: url.id,
-        type: url.type,
-      }))),
-        setIde(playlistmap.id);
       setPlaylist({
-        listOfIdPlaylistFromAPI: playlistmap,
+        listOfIdPlaylistFromAPI: tracksResponse.data.playlists.items.map(
+          (url) => ({
+            id: url.id,
+            type: url.type,
+          })
+        ),
 
         listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
       });
+      setIde(playlist.listOfIdPlaylistFromAPI.id);
       setAlbumSearch({
         listOfAlbumFromAPISearch: tracksResponse.data.albums.items,
 
@@ -62,18 +62,19 @@ function Navbar({
           })
         ),
       });
-      (trackmap = tracksResponse.data.tracks.items.map((urle) => ({
-        id: urle.id,
-        type: urle.type,
-      }))),
-        console.log(trackmap.id);
-        setTrackSearch({
-        listOfTrackIdFromAPISearch: trackmap,
+
+      setTrackSearch({
+        listOfTrackIdFromAPISearch: tracksResponse.data.tracks.items.map(
+          (urle) => ({
+            id: urle.id,
+            type: urle.type,
+          })
+        ),
 
         listOfTrackFromAPISearch: tracksResponse.data.tracks.items,
       });
 
-      setIde(trackmap.id);
+      setIde(trackSearch.listOfTrackIdFromAPISearch.id);
     });
 
     setSearch("");
@@ -99,12 +100,14 @@ function Navbar({
           </div>
         </form>
       </div>
-{ <div className="avatar">
-        <a href="#">
-          <img src={user.picture} alt="" width={25}/>
-          <span>{user.name}</span>
-        </a>
-      </div> }
+      {
+        <div className="avatar">
+          <a href="#">
+            <img src={user.picture} alt="" width={25} />
+            <span>{user.given_name}</span>
+          </a>
+        </div>
+      }
       {/* <div className="notification">
         <span>
           <MdNotifications />
@@ -157,23 +160,11 @@ const Container = styled.div`
       }
     }
   }
-  .notification {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: white;
-    span {
-      font-size: 20px;
-      color: blue;
-    }
-  }
+
   .avatar {
-    background-color: blue;
+    border: 1px solid blue;
     padding: 0.3rem 0.4rem;
-    padding-right: 2rem;
+    padding-right: 1rem;
     border-radius: 2rem;
     display: flex;
     justify-content: center;
@@ -190,12 +181,25 @@ const Container = styled.div`
       color: white;
       font-weight: bold;
       img {
-        border-radius:50%;
+        border-radius: 50%;
       }
-      span{
-        display:flex;
-        justify-content:center;
-        font-size:9px;
+      span {
+        display: flex;
+
+        align-items: center;
+        font-size: 9px;
+      }
+    }
+  }
+  @media (max-width: 900px) {
+    .search_bar {
+      width: 60%;
+    }
+    .avatar {
+      margin-left: 5px;
+      width: 90px;
+      span {
+        display: none;
       }
     }
   }

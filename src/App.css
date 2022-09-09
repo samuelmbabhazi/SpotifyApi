@@ -27,12 +27,11 @@ li {
   width: 90px;
   border-radius: 15px;
   outline: none;
-  border: none;
-
-  background-color: blue;
+  background-color: transparent;
+  border: 1px solid blue;
   color: white;
   height: 100%;
-  margin-top: 20px;
+  margin-top: 10px;
   font-size: 12px;
   font-weight: bold;
   z-index: 1;
@@ -55,4 +54,33 @@ li {
 
 h1 {
   width: 500px;
+}
+
+@media (max-width: 900px) {
+  .text {
+    margin-bottom: 30px;
+    margin-left: 10%;
+    margin-top: 70%;
+    font-size: 15px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+  }
+  h1 {
+    width: 300px;
+  }
+  .desk {
+    display: none;
+  }
+  .mobile {
+    display: flex;
+  }
+  .signout {
+    width: 90px;
+    margin-left: 75%;
+    height: 30px;
+  }
 }

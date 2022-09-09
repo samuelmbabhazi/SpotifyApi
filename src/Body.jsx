@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MdQueueMusic } from "react-icons/md";
+
 import styled from "styled-components";
 import Navbar from "./Navbar";
 function Body({
@@ -8,6 +8,7 @@ function Body({
   setIdp,
   setPlaylist,
   tracks,
+  trackSearch,
   setTracks,
   token,
   track,
@@ -19,7 +20,7 @@ function Body({
   setAlbumSearch,
   setTrackSearch,
   albumSearch,
-  trackSearch,
+
   setIdq,
   setYourSearchAlbum,
   setYourSearchTrack,
@@ -30,6 +31,12 @@ function Body({
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
   console.log("playlist", playlist.listOfIdPlaylistFromAPI);
+
+  const changePlayer = (id, type) => {
+    setIdp(id);
+    setType(type);
+  };
+
   return (
     <Container>
       <Navbar
@@ -51,6 +58,7 @@ function Body({
         setYourSearchAlbum={setYourSearchAlbum}
         setYourSearchTrack={setYourSearchTrack}
         user={user}
+        trackSearch={trackSearch}
       />
       <div className="entete">
         <span>{yourSearch}</span>
@@ -83,13 +91,7 @@ function Body({
         {albumSearch.listOfIconAlbumFromAPiSearch &&
           albumSearch.listOfIconAlbumFromAPiSearch.map((image, i) => {
             return (
-              <li
-                key={i}
-                onClick={() => {
-                  setIdp(image.id);
-                  setType(image.type);
-                }}
-              >
+              <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
                 {image.name}
               </li>
@@ -105,13 +107,7 @@ function Body({
         {trackSearch.listOfTrackFromAPISearch &&
           trackSearch.listOfTrackFromAPISearch.map((image, i) => {
             return (
-              <li
-                key={i}
-                onClick={() => {
-                  setIdp(image.id);
-                  setType(image.type);
-                }}
-              >
+              <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img
                   src={image.album.images[0] && image.album.images[0].url}
                   alt=""
@@ -130,13 +126,7 @@ function Body({
         {album.listOfIconAlbumFromAPi &&
           album.listOfIconAlbumFromAPi.map((image, i) => {
             return (
-              <li
-                key={i}
-                onClick={() => {
-                  setIdp(image.id);
-                  setType(image.type);
-                }}
-              >
+              <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
                 {image.name}
               </li>
@@ -152,12 +142,7 @@ function Body({
         {track.listOfTrackFromAPI &&
           track.listOfTrackFromAPI.map((image, i) => {
             return (
-              <li
-                key={i}
-                onClick={() => {
-                  setIdp(image.id), setType(image.type);
-                }}
-              >
+              <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img
                   src={image.album.images[0] && image.album.images[0].url}
                   alt=""
@@ -228,7 +213,7 @@ const Container = styled.div`
       }
     }
     li:hover {
-      transition:0.7s;
+      transition: 0.7s;
       transform: scale(1.1);
     }
   }
@@ -283,6 +268,23 @@ const Container = styled.div`
   .tracks {
     margin-top: 7%;
     margin-left: 3%;
+  }
+  @media (max-width: 900px) {
+    .playlist {
+      margin: 0 2rem;
+      display: flex;
+      padding-bottom: 10px;
+      align-items: center;
+      width: 90vw;
+      max-height: 100%;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        height: 0.2rem;
+        &-thumb {
+          background-color: blue;
+        }
+      }
+    }
   }
 `;
 export default React.memo(Body);
