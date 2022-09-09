@@ -162,7 +162,7 @@ const Container = styled.div`
   }
 
   .avatar {
-    border: 1px solid blue;
+    border: none;
     padding: 0.3rem 0.4rem;
     padding-right: 1rem;
     border-radius: 2rem;

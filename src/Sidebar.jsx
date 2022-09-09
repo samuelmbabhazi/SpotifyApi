@@ -65,7 +65,7 @@ function Sidebar({ genres, setIde, setYourSearch }) {
               })}
           </ul>
           <div className="line"></div>
-          <div className="card"></div>
+          {/* <div className="card"></div> */}
           <ul className="end">
             <li>
               <MdSettings />
@@ -87,11 +87,13 @@ function Sidebar({ genres, setIde, setYourSearch }) {
   );
 }
 const Container = styled.div`
+  position: fixed;
   background-color: #2d2d2d;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(20px);
   heigth: 100vh;
   display: flex;
+  right: 1090px;
   flex-direction: column;
   margin-top: -30px;
   width: 20vw;
@@ -147,7 +149,7 @@ const Container = styled.div`
   }
 
   .categorie {
-    height: 65vh;
+    height: 48vh;
     max-height: 100%;
     overflow: auto;
     &::-webkit-scrollbar {

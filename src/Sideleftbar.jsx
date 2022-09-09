@@ -16,8 +16,10 @@ function Sideleftbar({ idp, type }) {
   );
 }
 const Container = styled.div`
+  position: fixed;
   margin-top: 5%;
   overflow: hidden;
+  left: 1085px;
   display: flex;
   flex-direction: column;
   width: 20vw;
