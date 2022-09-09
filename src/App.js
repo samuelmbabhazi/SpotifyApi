@@ -15,7 +15,7 @@ const App = () => {
   const [ide, setIde] = useState("hiphop");
   const [type, setType] = useState("playlist");
   const [idp, setIdp] = useState("37i9dQZF1DX6tw5tib6ZrB");
-  const [idq,setIdq]=useState("2022")
+  const [idq, setIdq] = useState("2022");
   const [yourSearch, setYourSearch] = useState("POPULAR PLAYLIST");
   const [yourSearchALbum, setYourSearchALbum] = useState();
   const [yourSearchTrack, setYourSearchTrack] = useState();
@@ -50,32 +50,37 @@ const App = () => {
     listOfTracksFromAPI: [],
   });
 
-  const [user,setUser]=useState({})
- 
+  const [user, setUser] = useState({});
 
-function handleCallbackResponse(response){
- console.log("Encoded JWT ID token: " + response.credential);
- var userObject=jwtDecode(response.credential)
- console.log(userObject);
- setUser(userObject)
- document.getElementById("signInDiv").hidden=true;
-}
-function handleSignOut(event){
-  setUser({})
-  document.getElementById("signInDiv").hidden=false;
-}
+  function handleCallbackResponse(response) {
+    console.log("Encoded JWT ID token: " + response.credential);
+    var userObject = jwtDecode(response.credential);
+    console.log(userObject);
+    setUser(userObject);
+    document.getElementById("signInDiv").hidden = true;
+  }
+  function handleSignOut(event) {
+    setUser({});
+    window.location.reload();
+    document.getElementById("signInDiv").hidden = false;
+  }
+  if (Object.keys(user).length !== 0) {
+    document.getElementById("connexion").hidden = true;
+  }
   useEffect(() => {
-/*global google */
-google.accounts.id.initialize({
-  client_id:"335727433102-geo6pedmit8njss3hhe7nh6gfbkpt79a.apps.googleusercontent.com",
-  callback:handleCallbackResponse
-})
-google.accounts.id.renderButton(
-  document.getElementById("signInDiv"),
-  {theme:"outline",size:"large"}
-)
-google.accounts.id.prompt();
-console.log("user",user);
+    /*global google */
+    google.accounts.id.initialize({
+      client_id:
+        "335727433102-geo6pedmit8njss3hhe7nh6gfbkpt79a.apps.googleusercontent.com",
+      callback: handleCallbackResponse,
+    });
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      theme: "outline",
+      size: "large",
+    });
+    google.accounts.id.prompt();
+    console.log("user", user);
+
     axios("https://accounts.spotify.com/api/token", {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -180,77 +185,78 @@ console.log("user",user);
   }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
 
   return (
-   <div>
-    <div id="signInDiv">
-      <img src="logo.png" alt="" />
-    </div>
-    <div className="signout">
-    {
-      Object.keys(user).length !== 0 &&
-      <button className="button" onClick={(e)=>handleSignOut(e)}>Sign Out</button>
-    }
-    </div>
-  
-    
-    {Object.keys(user).length !== 0 && 
-      <Container>
-      <Sidebar
-        genres={genres}
-        ide={ide}
-        setIde={setIde}
-        setYourSearch={setYourSearch}
-      />
+    <div>
+      <div id="connexion" className="connexion">
+        <div className="text">
+          <h1>find and listen your favorite artist</h1>
+          <img src="logo.png" alt="" />
+        </div>
 
-      <Body
-        setAlbum={setAlbum}
-        album={album}
-        playlist={playlist}
-        setPlaylist={setPlaylist}
-        items={tracks.listOfTracksFromAPI}
-        setIdp={setIdp}
-        yourSearch={yourSearch}
-        setYourSearch={setYourSearch}
-        tracks={tracks}
-        track={track}
-        setTracks={setTracks}
-        token={token}
-        setIde={setIde}
-        setType={setType}
-        setTrack={setTrack}
-        setIdq={setIdq}
-        setTrackSearch={setTrackSearch}
-        setAlbumSearch={setAlbumSearch}
-        albumSearch={albumSearch}
-        trackSearch={trackSearch}
-        yourSearchALbum={yourSearchALbum}
-        yourSearchTrack={yourSearchTrack}
-        setYourSearchAlbum={setYourSearchALbum}
-        setYourSearchTrack={setYourSearchTrack}
-        user={user}
-      />
+        <div id="signInDiv"></div>
+      </div>
+      <div className="signout">
+        {Object.keys(user).length !== 0 && (
+          <button className="button" onClick={(e) => handleSignOut(e)}>
+            Sign Out
+          </button>
+        )}
+      </div>
 
-      <Sideleftbar
-        genres={genres}
-        items={tracks.listOfTracksFromAPI}
-        playing={playing}
-        idp={idp}
-        type={type}
-        setPlaying={setPlaying}
-      />
-    </Container>
-    }
+      {Object.keys(user).length !== 0 && (
+        <Container>
+          <Sidebar
+            genres={genres}
+            ide={ide}
+            setIde={setIde}
+            setYourSearch={setYourSearch}
+          />
 
+          <Body
+            setAlbum={setAlbum}
+            album={album}
+            playlist={playlist}
+            setPlaylist={setPlaylist}
+            items={tracks.listOfTracksFromAPI}
+            setIdp={setIdp}
+            yourSearch={yourSearch}
+            setYourSearch={setYourSearch}
+            tracks={tracks}
+            track={track}
+            setTracks={setTracks}
+            token={token}
+            setIde={setIde}
+            setType={setType}
+            setTrack={setTrack}
+            setIdq={setIdq}
+            setTrackSearch={setTrackSearch}
+            setAlbumSearch={setAlbumSearch}
+            albumSearch={albumSearch}
+            trackSearch={trackSearch}
+            yourSearchALbum={yourSearchALbum}
+            yourSearchTrack={yourSearchTrack}
+            setYourSearchAlbum={setYourSearchALbum}
+            setYourSearchTrack={setYourSearchTrack}
+            user={user}
+          />
+
+          <Sideleftbar
+            genres={genres}
+            items={tracks.listOfTracksFromAPI}
+            playing={playing}
+            idp={idp}
+            type={type}
+            setPlaying={setPlaying}
+          />
+        </Container>
+      )}
     </div>
   );
 };
 const Container = styled.div`
-
   display: flex;
-  
-@media (max-width: 900px) {
- flex-direction:column;
- 
-} 
-  
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+  }
 `;
 export default React.memo(App);

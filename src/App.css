@@ -38,14 +38,21 @@ li {
   z-index: 1;
 }
 .signout {
- 
   width: 90px;
   margin-left: 90%;
   height: 30px;
 }
-#signInDiv {
 
-  /* width: 100vw;
-  height: 100vh;
-  background-color: blue; */
+.text {
+  margin-bottom: 20px;
+  margin-top: 20%;
+  font-size: 30px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+h1 {
+  width: 500px;
 }
