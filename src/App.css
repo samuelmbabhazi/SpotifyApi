@@ -84,3 +84,7 @@ h1 {
     height: 30px;
   }
 }
+a {
+  text-decoration: none;
+  color: white;
+}

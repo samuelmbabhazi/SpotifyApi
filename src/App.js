@@ -201,7 +201,7 @@ const App = () => {
       </div>
 
       {Object.keys(user).length !== 0 && (
-        <Container>
+        <Container id="home">
           <Sidebar
             genres={genres}
             ide={ide}

@@ -25,18 +25,24 @@ function Sidebar({ genres, setIde, setYourSearch }) {
           <div className="line"></div>
           <ul>
             <span>MENU</span>
-            <li>
-              <MdHomeFilled />
-              <span>Home</span>
-            </li>
-            <li>
-              <MdSearch />
-              <span>Search</span>
-            </li>
-            <li>
-              <MdLibraryMusic />
-              <span>Your Library</span>
-            </li>
+            <a href="#home">
+              <li>
+                <MdHomeFilled />
+                <span>Home</span>
+              </li>
+            </a>
+            <a href="#search">
+              <li>
+                <MdSearch />
+                <span>Search</span>
+              </li>
+            </a>
+            <a href="#librairie">
+              <li>
+                <MdLibraryMusic />
+                <span>Your Library</span>
+              </li>
+            </a>
           </ul>
           <div className="line"></div>
 

@@ -60,7 +60,7 @@ function Body({
         user={user}
         trackSearch={trackSearch}
       />
-      <div className="entete">
+      <div className="entete" id="librairie">
         <span>{yourSearch}</span>
 
         <span className="detail">SEE DETAIL</span>

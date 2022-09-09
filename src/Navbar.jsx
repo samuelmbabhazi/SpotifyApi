@@ -82,7 +82,7 @@ function Navbar({
 
   return (
     <Container>
-      <div className="search_bar">
+      <div className="search_bar" id="search">
         <form action="" onSubmit={changeContent}>
           <input
             type="text"
