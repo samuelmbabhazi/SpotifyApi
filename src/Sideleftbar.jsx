@@ -100,10 +100,12 @@ const Container = styled.div`
     }
   }
   @media (max-width: 900px) {
+    position: relative;
     height: 170px;
     width: 80%;
-
-    margin-left: 10%;
+    margin-left: 45px;
+    left: -0px;
+    right: -30px;
   }
 `;
 export default Sideleftbar;
