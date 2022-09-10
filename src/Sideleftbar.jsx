@@ -23,8 +23,14 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 20vw;
-  background-color: #2d2d2d;
-  height: 128vh;
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255, 0.1),
+    rgb(255, 255, 255, 0)
+  );
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  height: 100vh;
   iframe {
     height: 100%;
   }

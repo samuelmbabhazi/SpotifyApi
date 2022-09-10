@@ -94,7 +94,11 @@ function Sidebar({ genres, setIde, setYourSearch }) {
 }
 const Container = styled.div`
   position: fixed;
-  background-color: #2d2d2d;
+  background: linear-gradient(
+    135deg,
+    rgb(255, 255, 255, 0.1),
+    rgb(255, 255, 255, 0)
+  );
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(20px);
   heigth: 100vh;

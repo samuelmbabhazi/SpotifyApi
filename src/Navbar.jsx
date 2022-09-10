@@ -140,7 +140,13 @@ const Container = styled.div`
     padding: 0px;
   }
   .search_bar {
-    background-color: white;
+    background: linear-gradient(
+      135deg,
+      rgb(255, 255, 255, 0.1),
+      rgb(255, 255, 255, 0)
+    );
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     width: 30%;
     padding: 0.4rem 1rem;
     border-radius: 2rem;
@@ -152,7 +158,9 @@ const Container = styled.div`
     }
 
     input {
+      background-color: transparent;
       border: none;
+      color: white;
       height: 1.5rem;
       width: 100%;
       &:focus {
