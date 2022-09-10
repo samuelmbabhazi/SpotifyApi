@@ -103,7 +103,7 @@ const Container = styled.div`
   backdrop-filter: blur(20px);
   heigth: 100vh;
   display: flex;
-  right: 1090px;
+  right: 79.8vw;
   flex-direction: column;
   margin-top: -30px;
   width: 20vw;
