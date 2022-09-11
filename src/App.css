@@ -37,6 +37,9 @@ li {
   font-weight: bold;
   z-index: 1;
 }
+#signInDiv {
+  margin-top: 25%;
+}
 .signout {
   width: 90px;
   margin-left: 100%;
@@ -47,7 +50,7 @@ li {
 }
 .text {
   margin-bottom: 20px;
-  margin-top: 20%;
+  margin-top: 40%;
   font-size: 30px;
   font-weight: bold;
   display: flex;
@@ -64,12 +67,10 @@ h1 {
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
 }
 @media (max-width: 900px) {
-  .connexion {
-    background-position: right;
-  }
-
   .text {
     margin-bottom: 30px;
     margin-left: 10%;
@@ -81,6 +82,9 @@ h1 {
     align-items: center;
     flex-direction: column;
     gap: 30px;
+  }
+  #signInDiv {
+    margin-top: 45%;
   }
   h1 {
     width: 300px;
