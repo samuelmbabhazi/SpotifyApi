@@ -63,12 +63,11 @@ h1 {
 }
 
 .connexion {
+  padding-top: 2px;
   background: url(../public/bg.png);
   background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
-  display: flex;
-  flex-direction: column;
 }
 @media (max-width: 900px) {
   .text {
