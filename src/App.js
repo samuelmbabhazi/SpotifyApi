@@ -187,7 +187,7 @@ const App = () => {
       <div id="connexion" className="connexion">
         <div className="text">
           <h1>find and listen your favorite artist</h1>
-          <img src="logo.png" alt="" />
+          {/* <img src="logo.png" alt="" /> */}
         </div>
 
         <div id="signInDiv"></div>

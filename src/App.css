@@ -61,11 +61,15 @@ h1 {
 
 .connexion {
   background: url(../public/bg.png);
-  background-position: center;
+  background-position: right;
   background-size: contain;
   background-repeat: no-repeat;
 }
 @media (max-width: 900px) {
+  .connexion {
+    background-position: right;
+  }
+
   .text {
     margin-bottom: 30px;
     margin-left: 10%;
