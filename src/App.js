@@ -56,6 +56,7 @@ const App = () => {
     var userObject = jwtDecode(response.credential);
     console.log(userObject);
     setUser(userObject);
+
     document.getElementById("signInDiv").hidden = true;
   }
   function handleSignOut(event) {
@@ -67,6 +68,7 @@ const App = () => {
     document.getElementById("connexion").hidden = true;
   }
   useEffect(() => {
+    setUser(user);
     /*global google */
     google.accounts.id.initialize({
       client_id:
@@ -181,7 +183,7 @@ const App = () => {
       });
     });
   }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
-  // localStorage.setItem(user);
+
   return (
     <div id="home">
       <div id="connexion" className="connexion">

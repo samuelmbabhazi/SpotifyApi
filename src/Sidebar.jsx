@@ -126,7 +126,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     .logo {
-      text-align: center;
+      padding-left: 10%;
       margin: 1rem 0;
     }
     img {
@@ -143,7 +143,7 @@ const Container = styled.div`
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-
+    padding-left: 10%;
     li {
       display: flex;
       gap: 1rem;
