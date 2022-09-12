@@ -75,7 +75,7 @@ const App = () => {
     });
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
       theme: "outline",
-      size: "large",
+      size: "medium",
     });
 
     console.log("user", user);
@@ -181,13 +181,12 @@ const App = () => {
       });
     });
   }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
-
+  // localStorage.setItem(user);
   return (
     <div id="home">
       <div id="connexion" className="connexion">
         <div className="text">
           <h1>find and listen your favorite artist</h1>
-          {/* <img src="logo.png" alt="" /> */}
         </div>
 
         <div id="signInDiv"></div>
