@@ -51,6 +51,34 @@ const App = () => {
 
   const [user, setUser] = useState({});
 
+  const [props, setProps] = useState({
+    setAlbum: setAlbum,
+    album: album,
+    playlist: playlist,
+    setPlaylis: setPlaylist,
+    items: tracks.listOfTracksFromAPI,
+    setIdp: setIdp,
+    yourSearch: yourSearch,
+    setYourSearch: setYourSearch,
+    tracks: tracks,
+    track: track,
+    setTracks: setTracks,
+    token: token,
+    setIde: setIde,
+    setType: setType,
+    setTrack: setTrack,
+    setIdq: setIdq,
+    setTrackSearch: setTrackSearch,
+    setAlbumSearch: setAlbumSearch,
+    albumSearch: albumSearch,
+    trackSearch: trackSearch,
+    yourSearchALbum: yourSearchALbum,
+    yourSearchTrack: yourSearchTrack,
+    setYourSearchAlbum: setYourSearchALbum,
+    setYourSearchTrack: setYourSearchTrack,
+    user: user,
+  });
+
   function handleCallbackResponse(response) {
     console.log("Encoded JWT ID token: " + response.credential);
     var userObject = jwtDecode(response.credential);
@@ -132,22 +160,6 @@ const App = () => {
         });
       });
     });
-    axios(`https://api.spotify.com/v1/search?q=${idq}&type=track&limit=50`, {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    }).then((tracksResponse) => {
-      setTrack({
-        listOfTrackIdFromAPI: tracksResponse.data.tracks.items.map((url) => ({
-          id: url.id,
-          type: url.type,
-        })),
-
-        listOfTrackFromAPI: tracksResponse.data.tracks.items,
-      });
-      console.log("track", tracksResponse);
-    });
 
     axios(
       `https://api.spotify.com/v1/browse/categories/${ide}/playlists?limit=50`,
@@ -163,31 +175,16 @@ const App = () => {
             type: url.type,
           })
         ),
-
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
       });
-
-      axios(`https://api.spotify.com/v1/playlists/${idp}/tracks?limit=50`, {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      }).then((tracksResponse) => {
-        setTracks({
-          selectedTrack: tracks.selectedTrack,
-          listOfTracksFromAPI: tracksResponse.data.items,
-        });
-        console.log("ancien", tracksResponse);
-      });
     });
-  }, [ide, idp, genres.selectedGenre, spotify.ClientId, spotify.ClientSecret]);
+  }, [props, spotify.ClientId, spotify.ClientSecret]);
 
   return (
     <div id="home">
       <div id="connexion" className="connexion">
         <div className="text">
           <h1>find and listen your favorite artist</h1>
-          {/* <img src="logo.png" alt="" /> */}
         </div>
 
         <div id="signInDiv"></div>
@@ -202,49 +199,11 @@ const App = () => {
 
       {Object.keys(user).length !== 0 && (
         <Container>
-          <Sidebar
-            genres={genres}
-            ide={ide}
-            setIde={setIde}
-            setYourSearch={setYourSearch}
-          />
+          <Sidebar props={props} setProps={setProps} />
 
-          <Body
-            setAlbum={setAlbum}
-            album={album}
-            playlist={playlist}
-            setPlaylist={setPlaylist}
-            items={tracks.listOfTracksFromAPI}
-            setIdp={setIdp}
-            yourSearch={yourSearch}
-            setYourSearch={setYourSearch}
-            tracks={tracks}
-            track={track}
-            setTracks={setTracks}
-            token={token}
-            setIde={setIde}
-            setType={setType}
-            setTrack={setTrack}
-            setIdq={setIdq}
-            setTrackSearch={setTrackSearch}
-            setAlbumSearch={setAlbumSearch}
-            albumSearch={albumSearch}
-            trackSearch={trackSearch}
-            yourSearchALbum={yourSearchALbum}
-            yourSearchTrack={yourSearchTrack}
-            setYourSearchAlbum={setYourSearchALbum}
-            setYourSearchTrack={setYourSearchTrack}
-            user={user}
-          />
+          <Body props={props} setProps={setProps} />
 
-          <Sideleftbar
-            genres={genres}
-            items={tracks.listOfTracksFromAPI}
-            playing={playing}
-            idp={idp}
-            type={type}
-            setPlaying={setPlaying}
-          />
+          <Sideleftbar props={props} setProps={setProps} />
         </Container>
       )}
     </div>

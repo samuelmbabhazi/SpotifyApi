@@ -7,9 +7,7 @@ import {
   MdSettings,
 } from "react-icons/md";
 
-function Sidebar({ genres, setIde, setYourSearch }) {
-  console.log(genres.listOfGenresFromAPI);
-
+function Sidebar({ props }) {
   return (
     <Container>
       <div className="desk">
@@ -48,15 +46,15 @@ function Sidebar({ genres, setIde, setYourSearch }) {
 
           <ul className="categorie">
             <span>CATEGORIES</span>
-            {genres.listOfIconFromAPi &&
-              genres.listOfIconFromAPi.map((icon, i) => {
+            {props.genres.listOfIconFromAPi &&
+              props.genres.listOfIconFromAPi.map((icon, i) => {
                 return (
                   <li
                     key={i}
                     value={icon.id}
                     onClick={() => {
-                      setIde(icon.id);
-                      setYourSearch("POPULAR PLAYLIST");
+                      props.setIde(icon.id);
+                      props.setYourSearch("POPULAR PLAYLIST");
                     }}
                   >
                     <img

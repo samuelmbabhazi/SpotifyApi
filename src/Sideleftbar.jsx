@@ -2,11 +2,11 @@ import React from "react";
 
 import styled from "styled-components";
 
-function Sideleftbar({ idp, type }) {
+function Sideleftbar({ props }) {
   return (
     <Container>
       <iframe
-        src={`https://open.spotify.com/embed/${type}/${idp}?utm_source=generator`}
+        src={`https://open.spotify.com/embed/${props.type}/${props.idp}?utm_source=generator`}
         frameBorder="0"
         allowFullScreen=""
         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"

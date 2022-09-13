@@ -2,80 +2,32 @@ import React, { useState } from "react";
 
 import styled from "styled-components";
 import Navbar from "./Navbar";
-function Body({
-  user,
-  playlist,
-  setIdp,
-  setPlaylist,
-  tracks,
-  trackSearch,
-  setTracks,
-  token,
-  track,
-  yourSearch,
-  setYourSearch,
-  album,
-  setIde,
-  setType,
-  setAlbumSearch,
-  setTrackSearch,
-  albumSearch,
-
-  setIdq,
-  setYourSearchAlbum,
-  setYourSearchTrack,
-  yourSearchALbum,
-  yourSearchTrack,
-}) {
-  console.log("newtrack", track);
+function Body({ props }) {
   const [resultSearch, setResultSearch] = useState({ listOfTracksSearch: [] });
   const [search, setSearch] = useState("");
-  console.log("playlist", playlist.listOfIdPlaylistFromAPI);
 
   const changePlayer = (id, type) => {
-    setIdp(id);
-    setType(type);
+    props.setIdp(id);
+    props.setType(type);
   };
 
   return (
     <Container>
       <Navbar
-        setPlaylist={setPlaylist}
-        playlist={playlist}
-        search={search}
-        token={token}
-        setSearch={setSearch}
-        tracks={tracks}
-        setTracks={setTracks}
         resultSearch={resultSearch}
         setResultSearch={setResultSearch}
-        setYourSearch={setYourSearch}
-        setIde={setIde}
-        setAlbumSearch={setAlbumSearch}
-        setTrackSearch={setTrackSearch}
-        album={album}
-        setIdq={setIdq}
-        setYourSearchAlbum={setYourSearchAlbum}
-        setYourSearchTrack={setYourSearchTrack}
-        user={user}
-        trackSearch={trackSearch}
+        props={props}
       />
       <div className="entete" id="librairie">
-        <span>{yourSearch}</span>
+        <span>{props.yourSearch}</span>
 
         <span className="detail">SEE DETAIL</span>
       </div>
       <ul className="playlist">
-        {playlist.listOfPlaylistFromAPI &&
-          playlist.listOfPlaylistFromAPI.map((image, i) => {
+        {props.playlist.listOfPlaylistFromAPI &&
+          props.playlist.listOfPlaylistFromAPI.map((image, i) => {
             return (
-              <li
-                key={i}
-                onClick={() => {
-                  setIdp(image.id);
-                  setType(image.type);
-                }}
-              >
+              <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img src={image.images[0] && image.images[0].url} alt="" />
                 {image.name}
               </li>
@@ -84,12 +36,12 @@ function Body({
       </ul>
       <br />
       <div className="entete">
-        <span>{yourSearchALbum}</span>
+        <span>{props.yourSearchALbum}</span>
       </div>
 
       <ul className="playlist">
-        {albumSearch.listOfIconAlbumFromAPiSearch &&
-          albumSearch.listOfIconAlbumFromAPiSearch.map((image, i) => {
+        {props.albumSearch.listOfIconAlbumFromAPiSearch &&
+          props.albumSearch.listOfIconAlbumFromAPiSearch.map((image, i) => {
             return (
               <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
@@ -100,12 +52,12 @@ function Body({
       </ul>
       <br />
       <div className="entete">
-        <span>{yourSearchTrack}</span>
+        <span>{props.yourSearchTrack}</span>
       </div>
 
       <ul className="playlist">
-        {trackSearch.listOfTrackFromAPISearch &&
-          trackSearch.listOfTrackFromAPISearch.map((image, i) => {
+        {props.trackSearch.listOfTrackFromAPISearch &&
+          props.trackSearch.listOfTrackFromAPISearch.map((image, i) => {
             return (
               <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img
@@ -123,8 +75,8 @@ function Body({
       </div>
 
       <ul className="playlist">
-        {album.listOfIconAlbumFromAPi &&
-          album.listOfIconAlbumFromAPi.map((image, i) => {
+        {props.album.listOfIconAlbumFromAPi &&
+          props.album.listOfIconAlbumFromAPi.map((image, i) => {
             return (
               <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img src={image.icon[0] && image.icon[0].url} alt="" />
@@ -139,8 +91,8 @@ function Body({
       </div>
 
       <ul className="playlist">
-        {track.listOfTrackFromAPI &&
-          track.listOfTrackFromAPI.map((image, i) => {
+        {props.track.listOfTrackFromAPI &&
+          props.track.listOfTrackFromAPI.map((image, i) => {
             return (
               <li key={i} onClick={() => changePlayer(image.id, image.type)}>
                 <img
@@ -152,26 +104,6 @@ function Body({
             );
           })}
       </ul>
-
-      {/* <div className="tracks">
-        <span className="span">
-          <MdQueueMusic />{" "}
-        </span>{" "}
-        TRACKS
-      </div> */}
-
-      {/* <div className="contcard">
-        <div className="card">
-          {items.map((item, idx) => (
-            <div>
-              <li key={idx}>
-                <img src={item.track.album.images[0].url} alt="" />
-                {item.track.name}
-              </li>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </Container>
   );
 }
