@@ -46,8 +46,8 @@ function Sidebar({ props }) {
 
           <ul className="categorie">
             <span>CATEGORIES</span>
-            {props.genres.listOfIconFromAPi &&
-              props.genres.listOfIconFromAPi.map((icon, i) => {
+            {props.listOfIconFromAPi &&
+              props.listOfIconFromAPi.map((icon, i) => {
                 return (
                   <li
                     key={i}
@@ -69,7 +69,7 @@ function Sidebar({ props }) {
               })}
           </ul>
           <div className="line"></div>
-          {/* <div className="card"></div> */}
+
           <ul className="end">
             <li>
               <MdSettings />

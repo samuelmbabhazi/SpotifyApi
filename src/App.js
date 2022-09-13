@@ -77,6 +77,16 @@ const App = () => {
     setYourSearchAlbum: setYourSearchALbum,
     setYourSearchTrack: setYourSearchTrack,
     user: user,
+    genres: genres,
+    setGenres: setGenres,
+    playing: playing,
+    setPlaying: setPlaying,
+    type: type,
+    setType: setType,
+    idp: idp,
+    setIdp: setIdp,
+    setIdq: setIdq,
+    idq: idq,
   });
 
   function handleCallbackResponse(response) {
@@ -178,7 +188,7 @@ const App = () => {
         listOfPlaylistFromAPI: playlistResponse.data.playlists.items,
       });
     });
-  }, [props, spotify.ClientId, spotify.ClientSecret]);
+  }, [props, idp, idq, spotify.ClientId, spotify.ClientSecret]);
 
   return (
     <div id="home">

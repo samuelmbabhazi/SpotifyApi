@@ -3,21 +3,7 @@ import styled from "styled-components";
 import { FaSearch } from "react-icons/fa";
 
 import axios from "axios";
-function Navbar({
-  user,
-  search,
-  setSearch,
-  trackSearch,
-  token,
-  setYourSearch,
-  setPlaylist,
-  setIde,
-  setAlbumSearch,
-  setTrackSearch,
-  setYourSearchAlbum,
-  setYourSearchTrack,
-  playlist,
-}) {
+function Navbar({ props, search, setSearch, resultSearch, setResultSearch }) {
   const Mysearch = (e) => {
     setSearch(e.target.value);
   };
@@ -25,9 +11,9 @@ function Navbar({
     event.preventDefault();
 
     setSearch(search);
-    setYourSearch("PLAYLIST : " + search);
-    setYourSearchAlbum("ALBUM : " + search);
-    setYourSearchTrack("TRACK : " + search);
+    props.setYourSearch("PLAYLIST : " + search);
+    props.setYourSearchAlbum("ALBUM : " + search);
+    props.setYourSearchTrack("TRACK : " + search);
     axios(
       `https://api.spotify.com/v1/search?q=${encodeURI(
         search
@@ -35,11 +21,11 @@ function Navbar({
       {
         method: "GET",
         headers: {
-          Authorization: "Bearer " + token,
+          Authorization: "Bearer " + props.token,
         },
       }
     ).then((tracksResponse) => {
-      setPlaylist({
+      props.setPlaylist({
         listOfIdPlaylistFromAPI: tracksResponse.data.playlists.items.map(
           (url) => ({
             id: url.id,
@@ -49,8 +35,8 @@ function Navbar({
 
         listOfPlaylistFromAPI: tracksResponse.data.playlists.items,
       });
-      setIde(playlist.listOfIdPlaylistFromAPI.id);
-      setAlbumSearch({
+      props.setIde(props.playlist.listOfIdPlaylistFromAPI.id);
+      props.setAlbumSearch({
         listOfAlbumFromAPISearch: tracksResponse.data.albums.items,
 
         listOfIconAlbumFromAPiSearch: tracksResponse.data.albums.items.map(
@@ -63,7 +49,7 @@ function Navbar({
         ),
       });
 
-      setTrackSearch({
+      props.setTrackSearch({
         listOfTrackIdFromAPISearch: tracksResponse.data.tracks.items.map(
           (urle) => ({
             id: urle.id,
@@ -74,7 +60,7 @@ function Navbar({
         listOfTrackFromAPISearch: tracksResponse.data.tracks.items,
       });
 
-      setIde(trackSearch.listOfTrackIdFromAPISearch.id);
+      props.setIde(props.trackSearch.listOfTrackIdFromAPISearch.id);
     });
 
     setSearch("");
@@ -103,8 +89,8 @@ function Navbar({
       {
         <div className="avatar">
           <a href="#">
-            <img src={user.picture} alt="" width={25} />
-            <span>{user.given_name}</span>
+            <img src={props.user.picture} alt="" width={25} />
+            <span>{props.user.given_name}</span>
           </a>
         </div>
       }

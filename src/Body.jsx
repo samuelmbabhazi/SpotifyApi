@@ -17,6 +17,8 @@ function Body({ props }) {
         resultSearch={resultSearch}
         setResultSearch={setResultSearch}
         props={props}
+        search={search}
+        setSearch={setSearch}
       />
       <div className="entete" id="librairie">
         <span>{props.yourSearch}</span>
