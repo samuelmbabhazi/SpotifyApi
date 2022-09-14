@@ -1,7 +1,7 @@
 const Identifiants = () => {
   return {
-    ClientId: "007c7d1f9bbe4abea2d80be294faf921",
-    ClientSecret: "4eafd67b407e4201a3951eccbf9490a5",
+    ClientId: process.env.REACT_APP_CLIENT_ID,
+    ClientSecret: process.env.REACT_APP_CLIENT_SECRET,
   };
 };
 

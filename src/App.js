@@ -71,8 +71,7 @@ const App = () => {
     setUser(user);
     /*global google */
     google.accounts.id.initialize({
-      client_id:
-        "335727433102-geo6pedmit8njss3hhe7nh6gfbkpt79a.apps.googleusercontent.com",
+      client_id: process.env.REACT_APP_CLIENT_ID_GOOGLE,
       callback: handleCallbackResponse,
     });
     google.accounts.id.renderButton(document.getElementById("signInDiv"), {
