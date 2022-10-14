@@ -152,26 +152,6 @@ function Body({
             );
           })}
       </ul>
-
-      {/* <div className="tracks">
-        <span className="span">
-          <MdQueueMusic />{" "}
-        </span>{" "}
-        TRACKS
-      </div> */}
-
-      {/* <div className="contcard">
-        <div className="card">
-          {items.map((item, idx) => (
-            <div>
-              <li key={idx}>
-                <img src={item.track.album.images[0].url} alt="" />
-                {item.track.name}
-              </li>
-            </div>
-          ))}
-        </div>
-      </div> */}
     </Container>
   );
 }
@@ -206,15 +186,20 @@ const Container = styled.div`
       padding-bottom: 0.5rem;
       list-style: none;
       font-size: 12px;
+
       img {
         height: 11rem;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         cursor: pointer;
       }
     }
+
     li:hover {
       transition: 0.7s;
       transform: scale(1.1);
+    }
+    li:hover li:not(:hover) {
+      opacity: 0.2;
     }
   }
   .contcard {
